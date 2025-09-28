@@ -1,48 +1,131 @@
-@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
+/* Import glassmorphism utilities */
+@import './styles/glassmorphism.css';
+
+/* Modern CSS Reset + Base Styles */
 :root {
-  font-family: 'Urbanist', system-ui, sans-serif;
-  line-height: 1.5;
+  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+  line-height: 1.6;
   font-weight: 400;
   color-scheme: dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #0a0a0a;
+  color: rgba(255, 255, 255, 0.92);
+  background-color: #0D0A10;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
+  /* Brand colors - CSS Variables */
+  --brand-50: #FFF1F6;
+  --brand-100: #FFE4ED;
+  --brand-200: #FFC9DC;
+  --brand-300: #FF9DC1;
+  --brand-400: #FF71B8;
+  --brand-500: #FF4FD8;
+  --brand-600: #E03BBE;
+  --brand-700: #BA2D9C;
+  --brand-800: #8E2377;
+  --brand-900: #5A164B;
+  
+  /* Lavender palette */
+  --lavender-400: #C9B6FF;
+  --lavender-500: #B794F6;
+  --lavender-600: #9F7AEA;
+  
+  /* Blush palette */
+  --blush-300: #FFC7D9;
+  --blush-400: #FFB3CC;
+  --blush-500: #FF9FBF;
+  
+  /* Dark theme enhanced */
+  --dark-900: #0D0A10;
+  --dark-800: #1A1220;
+  --dark-700: #2A2030;
+  --dark-600: #3A2F40;
+  --dark-500: #4A3F50;
 }
 
 * {
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a0a1a 25%, #2a0a2a 50%, #1a0a1a 75%, #0a0a0a 100%);
-  overflow-x: hidden;
+/* Modern CSS Reset */
+* {
+  box-sizing: border-box;
 }
 
-/* Custom scrollbar */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--dark-900);
+  overflow-x: hidden;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', system-ui, sans-serif);
+}
+
+/* Enhanced base for images */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Better form elements */
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+}
+
+/* Focus management */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--brand-400);
+  outline-offset: 2px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Modern feminine scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #1a1a1a;
+  background: var(--dark-800);
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(45deg, #ff0080, #8b5cf6);
-  border-radius: 4px;
+  background: linear-gradient(45deg, var(--brand-500), var(--lavender-400));
+  border-radius: 3px;
+  box-shadow: 0 0 3px rgba(255, 79, 216, 0.3);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(45deg, #ff0080, #8b5cf6);
-  filter: brightness(1.2);
+  background: linear-gradient(45deg, var(--brand-400), var(--lavender-500));
+  box-shadow: 0 0 6px rgba(255, 79, 216, 0.5);
 }
 
 /* Hide scrollbar for gallery */
@@ -55,14 +138,26 @@ body {
   display: none;  /* Safari and Chrome */
 }
 
-/* Glow effects */
+/* Enhanced glow effects with new brand colors */
 .glow-text {
-  text-shadow: 0 0 10px rgba(255, 0, 128, 0.5);
+  text-shadow: 0 0 12px rgba(255, 79, 216, 0.6),
+               0 0 24px rgba(201, 182, 255, 0.4);
+}
+
+.glow-text-soft {
+  text-shadow: 0 0 8px rgba(255, 199, 217, 0.5),
+               0 0 16px rgba(255, 113, 184, 0.3);
 }
 
 .glow-border {
-  border: 1px solid rgba(255, 0, 128, 0.3);
-  box-shadow: 0 0 20px rgba(255, 0, 128, 0.2);
+  border: 1px solid rgba(255, 79, 216, 0.4);
+  box-shadow: 0 0 20px rgba(255, 79, 216, 0.25),
+              0 0 40px rgba(201, 182, 255, 0.15);
+}
+
+.glow-border-soft {
+  border: 1px solid rgba(255, 199, 217, 0.3);
+  box-shadow: 0 0 15px rgba(255, 199, 217, 0.2);
 }
 
 .blur-overlay {

@@ -1,0 +1,232 @@
+/* Glassmorphism & Modern Feminine Design System */
+
+/* Core glassmorphism utilities */
+.glass {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.22) inset, 
+              0 10px 30px rgba(255, 79, 216, 0.22);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+}
+
+.glass--hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, 
+              background 0.3s ease;
+}
+
+.glass--hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) inset, 
+              0 18px 40px rgba(255, 79, 216, 0.32);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Glass variants */
+.glass-pink {
+  background: rgba(255, 79, 216, 0.08);
+  border: 1px solid rgba(255, 79, 216, 0.2);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15) inset, 
+              0 10px 30px rgba(255, 79, 216, 0.3);
+}
+
+.glass-lavender {
+  background: rgba(201, 182, 255, 0.08);
+  border: 1px solid rgba(201, 182, 255, 0.2);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15) inset, 
+              0 10px 30px rgba(201, 182, 255, 0.25);
+}
+
+.glass-blush {
+  background: rgba(255, 199, 217, 0.06);
+  border: 1px solid rgba(255, 199, 217, 0.15);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.12) inset, 
+              0 8px 25px rgba(255, 199, 217, 0.2);
+}
+
+/* Gradient text utilities */
+.text-gradient {
+  background: linear-gradient(90deg, #FF9DC1, #FF4FD8 45%, #C9B6FF 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-soft {
+  background: linear-gradient(135deg, #FFC7D9, #FF71B8, #C9B6FF);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-warm {
+  background: linear-gradient(45deg, #FF6399, #FF4FD8, #E03BBE);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Grain overlay for film aesthetic */
+.bg-grain {
+  position: relative;
+}
+
+.bg-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.65' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/feColorMatrix%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* Aurora background effects */
+.bg-aurora-soft {
+  background: 
+    radial-gradient(800px circle at 25% 15%, rgba(255, 113, 184, 0.2), transparent 50%),
+    radial-gradient(600px circle at 75% 20%, rgba(201, 182, 255, 0.15), transparent 50%),
+    radial-gradient(400px circle at 50% 80%, rgba(255, 199, 217, 0.1), transparent 50%),
+    linear-gradient(180deg, #0D0A10 0%, #1A1220 50%, #0D0A10 100%);
+}
+
+.bg-aurora-intense {
+  background: 
+    radial-gradient(1200px circle at 20% 10%, rgba(255, 113, 184, 0.35), transparent 60%),
+    radial-gradient(1000px circle at 80% 30%, rgba(201, 182, 255, 0.30), transparent 60%),
+    radial-gradient(600px circle at 50% 70%, rgba(255, 79, 216, 0.15), transparent 60%),
+    linear-gradient(180deg, #0D0A10 0%, #1A1220 100%);
+}
+
+/* Blob shapes for animated backgrounds */
+.blob {
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  filter: blur(40px);
+}
+
+.blob-sm {
+  border-radius: 40% 60% 60% 40% / 40% 40% 60% 60%;
+  filter: blur(25px);
+}
+
+/* Magnetic button effect */
+.btn-magnetic {
+  transition: transform 0.2s ease-out;
+  will-change: transform;
+}
+
+.btn-magnetic:hover {
+  transform: scale(1.02);
+}
+
+/* Reveal animation utility */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: all 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.reveal.is-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Focus states dla accessibility */
+.focus-brand {
+  outline: 2px solid #FF71B8;
+  outline-offset: 2px;
+}
+
+/* Glow effects */
+.glow-pink {
+  box-shadow: 0 0 20px rgba(255, 79, 216, 0.4),
+              0 0 40px rgba(255, 79, 216, 0.2),
+              0 0 80px rgba(255, 79, 216, 0.1);
+}
+
+.glow-purple {
+  box-shadow: 0 0 20px rgba(201, 182, 255, 0.4),
+              0 0 40px rgba(201, 182, 255, 0.2),
+              0 0 80px rgba(201, 182, 255, 0.1);
+}
+
+.glow-soft {
+  box-shadow: 0 0 15px rgba(255, 199, 217, 0.3),
+              0 0 30px rgba(255, 199, 217, 0.1);
+}
+
+/* Cross-browser fallbacks */
+@supports not (backdrop-filter: blur(1px)) {
+  .glass {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+  
+  .glass-pink {
+    background: rgba(255, 79, 216, 0.15);
+    border: 1px solid rgba(255, 79, 216, 0.3);
+  }
+  
+  .glass-lavender {
+    background: rgba(201, 182, 255, 0.15);
+    border: 1px solid rgba(201, 182, 255, 0.3);
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .reveal {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .glass,
+  .glass-pink,
+  .glass-lavender,
+  .glass-blush {
+    background: rgba(255, 255, 255, 0.95);
+    color: #000;
+    border: 2px solid #000;
+  }
+  
+  .text-gradient,
+  .text-gradient-soft,
+  .text-gradient-warm {
+    background: none;
+    color: currentColor;
+    -webkit-background-clip: initial;
+    background-clip: initial;
+  }
+}
+
+/* Print styles */
+@media print {
+  .glass,
+  .glass-pink,
+  .glass-lavender,
+  .glass-blush {
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  
+  .bg-aurora-soft,
+  .bg-aurora-intense,
+  .bg-grain::after {
+    display: none;
+  }
+}
