@@ -53,10 +53,10 @@ const PersonalIntro: React.FC = () => {
 
   return (
     <section className="py-20 px-4 relative overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-dark-800/50 to-transparent"></div>
+      {/* Background Effects - subtle aurora */}
+      <div className="absolute inset-0 bg-gradient-to-b from-dark-900/20 via-dark-800/30 to-dark-900/20"></div>
       
-      <div className="max-w-6xl mx-auto relative z-10">
+      <div className="container mx-auto relative z-10">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -69,7 +69,7 @@ const PersonalIntro: React.FC = () => {
             <div>
               <motion.h2
                 variants={itemVariants}
-                className="text-4xl md:text-5xl font-playfair font-bold mb-6 glow-text"
+                className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 text-gradient leading-tight"
               >
                 Hej! Jestem Laura
               </motion.h2>
@@ -80,12 +80,12 @@ const PersonalIntro: React.FC = () => {
                 className="lg:hidden mb-8"
               >
                 <div className="relative group max-w-sm mx-auto">
-                  {/* Hero-style Glow Effect */}
-                  <div className="absolute -inset-4 bg-gradient-to-r from-neon-pink via-neon-purple to-neon-pink rounded-3xl blur-xl opacity-40 group-hover:opacity-60 animate-pulse-slow transition-opacity duration-500"></div>
+                  {/* Aurora Glow Effect */}
+                  <div className="absolute -inset-4 bg-gradient-to-r from-brand-500 via-lavender-400 to-blush-400 rounded-3xl blur-xl opacity-40 group-hover:opacity-60 animate-pulse-slow transition-opacity duration-500"></div>
 
-                  {/* Hero-style Image Container */}
-                  <div className="relative bg-gradient-to-br from-neon-pink via-purple-500 to-neon-purple rounded-3xl p-1.5 group-hover:scale-105 transition-all duration-500 shadow-2xl shadow-neon-pink/25">
-                    <div className="aspect-[3/4] rounded-3xl bg-gradient-to-br from-dark-900 to-dark-800 overflow-hidden relative border border-gray-700/25">
+                  {/* Glass Image Container */}
+                  <div className="relative glass glass--hover rounded-3xl p-1.5 transition-all duration-500 shadow-glass">
+                    <div className="aspect-[3/4] rounded-3xl bg-gradient-to-br from-dark-800 to-dark-700 overflow-hidden relative border border-white/10">
                       <img
                         src={lauraImage}
                         alt="Laura - Sensual Portrait"
@@ -99,20 +99,20 @@ const PersonalIntro: React.FC = () => {
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/8 to-transparent skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 rounded-3xl"></div>
                     </div>
 
-                    {/* Hero-style Verification Badge */}
+                    {/* Verification Badge - nowy design */}
                     <div
-                      className="absolute -top-2 -right-2 bg-gradient-to-r from-green-400 to-emerald-500 text-white p-2.5 rounded-full shadow-xl shadow-green-500/40 animate-bounce-slow border-2 border-white/20"
+                      className="absolute -top-2 -right-2 glass-pink text-white p-2.5 rounded-full shadow-glow-pink animate-bounce-slow"
                       aria-label="Profil zweryfikowany"
                       role="img"
                     >
-                      <CheckCircle className="w-5 h-5 drop-shadow-lg" />
-                      <div className="absolute inset-0 bg-green-400/15 rounded-full blur-md animate-pulse"></div>
+                      <CheckCircle className="w-5 h-5 drop-shadow-lg text-brand-400" />
+                      <div className="absolute inset-0 bg-brand-400/20 rounded-full blur-md animate-pulse"></div>
                     </div>
                   </div>
 
-                  {/* Hero-style floating particles */}
-                  <div className="absolute -top-1 -left-1 w-2 h-2 bg-neon-pink rounded-full animate-float opacity-50 shadow-lg shadow-neon-pink/40" role="img" aria-label="Dekoracyjny element"></div>
-                  <div className="absolute bottom-1/4 -right-2 w-2 h-2 bg-neon-purple rounded-full animate-float delay-1500 opacity-50 shadow-lg shadow-neon-purple/40" role="img" aria-label="Dekoracyjny element"></div>
+                  {/* Floating particles z nowymi kolorami */}
+                  <div className="absolute -top-1 -left-1 w-2 h-2 bg-brand-500 rounded-full animate-float opacity-60 shadow-lg shadow-brand-500/40" role="img" aria-label="Dekoracyjny element"></div>
+                  <div className="absolute bottom-1/4 -right-2 w-2 h-2 bg-lavender-400 rounded-full animate-float-delayed opacity-50 shadow-lg shadow-lavender-400/40" role="img" aria-label="Dekoracyjny element"></div>
                 </div>
               </motion.div>
               
@@ -146,50 +146,50 @@ const PersonalIntro: React.FC = () => {
             {/* Stats */}
             <motion.div
               variants={itemVariants}
-              className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8 border-t border-neon-pink/20"
+              className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8 border-t border-brand-500/20"
             >
               <div className="text-center group">
                 <div className="flex items-center justify-center mb-3">
-                  <div className="bg-neon-pink/10 p-2 rounded-full group-hover:bg-neon-pink/20 transition-colors duration-300">
-                    <Calendar className="w-5 h-5 text-neon-pink" />
+                  <div className="bg-brand-500/10 p-2 rounded-full group-hover:bg-brand-500/20 transition-colors duration-300">
+                    <Calendar className="w-5 h-5 text-brand-500" />
                   </div>
                 </div>
-                <div className="text-3xl font-bold text-neon-pink mb-2">22</div>
-                <div className="text-sm text-gray-400">Wiek</div>
+                <div className="text-3xl font-bold text-brand-500 mb-2">22</div>
+                <div className="text-sm text-white/60">Wiek</div>
               </div>
               <div className="text-center group">
                 <div className="flex items-center justify-center mb-3">
-                  <div className="bg-neon-purple/10 p-2 rounded-full group-hover:bg-neon-purple/20 transition-colors duration-300">
-                    <Weight className="w-5 h-5 text-neon-purple" />
+                  <div className="bg-lavender-400/10 p-2 rounded-full group-hover:bg-lavender-400/20 transition-colors duration-300">
+                    <Weight className="w-5 h-5 text-lavender-400" />
                   </div>
                 </div>
-                <div className="text-3xl font-bold text-neon-purple mb-2">52kg</div>
-                <div className="text-sm text-gray-400">Waga</div>
+                <div className="text-3xl font-bold text-lavender-400 mb-2">52kg</div>
+                <div className="text-sm text-white/60">Waga</div>
               </div>
               <div className="text-center group">
                 <div className="flex items-center justify-center mb-3">
-                  <div className="bg-neon-pink/10 p-2 rounded-full group-hover:bg-neon-pink/20 transition-colors duration-300">
-                    <Ruler className="w-5 h-5 text-neon-pink" />
+                  <div className="bg-brand-500/10 p-2 rounded-full group-hover:bg-brand-500/20 transition-colors duration-300">
+                    <Ruler className="w-5 h-5 text-brand-500" />
                   </div>
                 </div>
-                <div className="text-3xl font-bold text-neon-pink mb-2">165cm</div>
-                <div className="text-sm text-gray-400">Wzrost</div>
+                <div className="text-3xl font-bold text-brand-500 mb-2">165cm</div>
+                <div className="text-sm text-white/60">Wzrost</div>
               </div>
               <div className="text-center group">
                 <div className="flex items-center justify-center mb-3">
-                  <div className="bg-neon-purple/10 p-2 rounded-full group-hover:bg-neon-purple/20 transition-colors duration-300">
-                    <User className="w-5 h-5 text-neon-purple" />
+                  <div className="bg-blush-400/10 p-2 rounded-full group-hover:bg-blush-400/20 transition-colors duration-300">
+                    <User className="w-5 h-5 text-blush-400" />
                   </div>
                 </div>
-                <div className="text-3xl font-bold text-neon-purple mb-2">85C</div>
-                <div className="text-sm text-gray-400">Biust</div>
+                <div className="text-3xl font-bold text-blush-400 mb-2">85C</div>
+                <div className="text-sm text-white/60">Biust</div>
               </div>
             </motion.div>
 
             {/* Trust Certificates */}
             <motion.div
               variants={itemVariants}
-              className="pt-8 mt-8 border-t border-neon-purple/20"
+              className="pt-8 mt-8 border-t border-lavender-400/20"
             >
        
 
@@ -200,7 +200,7 @@ const PersonalIntro: React.FC = () => {
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.4, delay: 0.8 + index * 0.1 }}
-                    className="flex flex-col items-center text-center p-3 md:p-4 rounded-xl bg-gradient-to-br from-dark-800/60 to-dark-700/60 backdrop-blur-lg border border-gray-600/25 hover:border-neon-pink/40 transition-all duration-300 group cursor-pointer shadow-lg hover:shadow-xl hover:shadow-neon-pink/15 min-h-[100px] md:min-h-[120px]"
+                    className="glass glass--hover flex flex-col items-center text-center p-3 md:p-4 rounded-xl transition-all duration-300 group cursor-pointer min-h-[100px] md:min-h-[120px]"
                     role="button"
                     tabIndex={0}
                     aria-label={certificate.ariaLabel}
@@ -223,12 +223,12 @@ const PersonalIntro: React.FC = () => {
             className="relative hidden lg:block order-2 lg:order-2"
           >
             <div className="relative group">
-              {/* Hero-style Glow Effect */}
-              <div className="absolute -inset-4 bg-gradient-to-r from-neon-pink via-neon-purple to-neon-pink rounded-3xl blur-xl opacity-40 group-hover:opacity-60 animate-pulse-slow transition-opacity duration-500"></div>
+              {/* Aurora Glow Effect */}
+              <div className="absolute -inset-4 bg-gradient-to-r from-brand-500 via-lavender-400 to-blush-400 rounded-3xl blur-xl opacity-40 group-hover:opacity-60 animate-pulse-slow transition-opacity duration-500"></div>
 
-              {/* Hero-style Image Container with original sizing */}
-              <div className="relative bg-gradient-to-br from-neon-pink via-purple-500 to-neon-purple rounded-3xl p-1.5 group-hover:scale-105 transition-all duration-500 shadow-2xl shadow-neon-pink/25">
-                <div className="aspect-[3/4] rounded-3xl bg-gradient-to-br from-dark-900 to-dark-800 overflow-hidden relative border border-gray-700/25">
+              {/* Glass Image Container */}
+              <div className="relative glass glass--hover rounded-3xl p-1.5 transition-all duration-500 shadow-glass">
+                <div className="aspect-[3/4] rounded-3xl bg-gradient-to-br from-dark-800 to-dark-700 overflow-hidden relative border border-white/10">
                   <img
                     src={lauraImage}
                     alt="Laura - Sensual Portrait"
@@ -242,37 +242,37 @@ const PersonalIntro: React.FC = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/8 to-transparent skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 rounded-3xl"></div>
                 </div>
 
-                {/* Hero-style Verification Badge */}
+                {/* Verification Badge - nowy design */}
                 <div
-                  className="absolute -top-2 -right-2 sm:-top-3 sm:-right-3 bg-gradient-to-r from-green-400 to-emerald-500 text-white p-2.5 sm:p-3 rounded-full shadow-xl shadow-green-500/40 animate-bounce-slow border-2 border-white/20"
+                  className="absolute -top-2 -right-2 sm:-top-3 sm:-right-3 glass-pink text-white p-2.5 sm:p-3 rounded-full shadow-glow-pink animate-bounce-slow"
                   aria-label="Profil zweryfikowany"
                   role="img"
                 >
-                  <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 drop-shadow-lg" />
-                  <div className="absolute inset-0 bg-green-400/15 rounded-full blur-md animate-pulse"></div>
+                  <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 drop-shadow-lg text-brand-400" />
+                  <div className="absolute inset-0 bg-brand-400/20 rounded-full blur-md animate-pulse"></div>
                 </div>
               </div>
 
-              {/* Hero-style floating particles */}
-              <div className="absolute -top-1 -left-1 sm:-top-2 sm:-left-2 w-2 h-2 sm:w-3 sm:h-3 bg-neon-pink rounded-full animate-float opacity-50 shadow-lg shadow-neon-pink/40" role="img" aria-label="Dekoracyjny element"></div>
-              <div className="absolute bottom-1/4 -right-2 sm:-right-3 w-2 h-2 sm:w-2.5 sm:h-2.5 bg-neon-purple rounded-full animate-float delay-1500 opacity-50 shadow-lg shadow-neon-purple/40" role="img" aria-label="Dekoracyjny element"></div>
+              {/* Floating particles z nowymi kolorami */}
+              <div className="absolute -top-1 -left-1 sm:-top-2 sm:-left-2 w-2 h-2 sm:w-3 sm:h-3 bg-brand-500 rounded-full animate-float opacity-60 shadow-lg shadow-brand-500/40" role="img" aria-label="Dekoracyjny element"></div>
+              <div className="absolute bottom-1/4 -right-2 sm:-right-3 w-2 h-2 sm:w-2.5 sm:h-2.5 bg-lavender-400 rounded-full animate-float-delayed opacity-50 shadow-lg shadow-lavender-400/40" role="img" aria-label="Dekoracyjny element"></div>
             </div>
 
-            {/* Floating Elements */}
+            {/* Floating Elements z nowym designem */}
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 3, repeat: Infinity }}
-              className="absolute -top-4 -left-4 bg-neon-purple/20 backdrop-blur-sm rounded-full p-3"
+              className="absolute -top-4 -left-4 glass-lavender rounded-full p-3"
             >
-              <Heart className="w-6 h-6 text-neon-purple" />
+              <Heart className="w-6 h-6 text-lavender-400" />
             </motion.div>
 
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 4, repeat: Infinity, delay: 1 }}
-              className="absolute -bottom-4 -right-4 bg-neon-pink/20 backdrop-blur-sm rounded-full p-3"
+              className="absolute -bottom-4 -right-4 glass-pink rounded-full p-3"
             >
-              <Star className="w-6 h-6 text-neon-pink" />
+              <Star className="w-6 h-6 text-brand-400" />
             </motion.div>
           </motion.div>
         </motion.div>

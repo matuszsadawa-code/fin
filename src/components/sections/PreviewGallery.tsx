@@ -180,19 +180,19 @@ const PreviewGallery: React.FC = () => {
 
   return (
     <section id="preview-gallery" className="py-20 px-4 relative overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-to-b from-dark-900/50 via-transparent to-dark-900/50"></div>
+      {/* Background Effects - subtle aurora */}
+      <div className="absolute inset-0 bg-gradient-to-b from-dark-900/30 via-dark-800/20 to-dark-900/30"></div>
       
-      <div className="max-w-6xl mx-auto relative z-10">
+      <div className="container mx-auto relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl font-bold text-white mb-6"
+            className="text-4xl md:text-5xl font-display font-bold text-white mb-6"
           >
-            Moja <span className="text-neon-pink">Galeria</span>
+            Moja <span className="text-gradient">Galeria</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 30 }}
@@ -224,8 +224,8 @@ const PreviewGallery: React.FC = () => {
                 onClick={() => handleItemClick(item)}
                 className="relative group cursor-pointer flex-shrink-0"
               >
-                {/* Image/Video Container */}
-                <div className="relative w-64 aspect-[4/5] rounded-2xl overflow-hidden bg-gradient-to-br from-dark-800 to-dark-700">
+                {/* Image/Video Container - glass design */}
+                <div className="relative w-64 aspect-[4/5] rounded-2xl overflow-hidden glass">
                   {/* Actual Image */}
                   {item.imageUrl && (
                     <img
@@ -250,22 +250,22 @@ const PreviewGallery: React.FC = () => {
                     </div>
                   )}
 
-                {/* Blur Overlay for NSFW */}
+                {/* Blur Overlay for NSFW - glass design */}
                 {item.isBlurred && (
-                  <div className="absolute inset-0 backdrop-blur-xl bg-black/30 flex items-center justify-center">
+                  <div className="absolute inset-0 backdrop-blur-xl bg-black/30 flex items-center justify-center glass-pink">
                     <div className="text-center">
-                      <Lock className="w-12 h-12 text-neon-pink mx-auto mb-4" />
+                      <Lock className="w-12 h-12 text-brand-400 mx-auto mb-4 drop-shadow-lg" />
                       <p className="text-white font-semibold mb-2">Treść dla dorosłych</p>
-                      <p className="text-gray-300 text-sm">Kliknij aby odblokować</p>
+                      <p className="text-white/80 text-sm">Kliknij aby odblokować</p>
                     </div>
                   </div>
                 )}
 
-                {/* Play Button for Videos */}
+                {/* Play Button for Videos - glass design */}
                 {item.type === 'video' && !item.isBlurred && (
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-16 h-16 bg-neon-pink/80 rounded-full flex items-center justify-center">
-                      <Play className="w-8 h-8 text-white ml-1" />
+                    <div className="glass-pink w-16 h-16 rounded-full flex items-center justify-center shadow-glow-pink">
+                      <Play className="w-8 h-8 text-white ml-1 drop-shadow-lg" />
                     </div>
                   </div>
                 )}
@@ -295,13 +295,13 @@ const PreviewGallery: React.FC = () => {
                   {item.category.toUpperCase()}
                 </div>
 
-                {/* Glow Effect */}
+                {/* Glow Effect - nowe kolory */}
                 <div className={`
                   absolute -inset-1 rounded-2xl blur-lg transition-opacity duration-300 -z-10
-                  ${hoveredItem === item.id ? 'opacity-30' : 'opacity-0'}
+                  ${hoveredItem === item.id ? 'opacity-40' : 'opacity-0'}
                   ${item.isBlurred 
-                    ? 'bg-gradient-to-r from-red-500 to-pink-500' 
-                    : 'bg-gradient-to-r from-neon-pink to-neon-purple'
+                    ? 'bg-gradient-to-r from-brand-600 to-brand-500' 
+                    : 'bg-gradient-to-r from-brand-500 to-lavender-400'
                   }
                 `}></div>
                 </div>

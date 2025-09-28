@@ -13,16 +13,31 @@ import InteractiveHearts from './components/animations/InteractiveHearts'
 import RealTimeActivityWidget from './components/ui/RealTimeActivityWidget'
 
 import { trackPageView } from './utils/analytics'
+import { initAllAnimations } from './utils/animations'
 
 function App() {
   useEffect(() => {
     // Track initial page view
     trackPageView('home')
+    
+    // Initialize feminine design system animations
+    const timer = setTimeout(() => {
+      initAllAnimations()
+    }, 100)
+    
+    return () => clearTimeout(timer)
   }, [])
 
   return (
-    <div className="min-h-screen bg-neon-gradient relative">
-      {/* Latające serduszka w tle */}
+    <div className="min-h-screen bg-aurora bg-grain relative overflow-hidden">
+      {/* Aurora animated background blobs */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-brand-500/30 blur-3xl animate-blob opacity-60"></div>
+        <div className="absolute top-1/3 -right-24 w-[28rem] h-[28rem] rounded-full bg-lavender-400/20 blur-3xl animate-blob-delayed opacity-50"></div>
+        <div className="absolute bottom-1/4 left-1/4 w-80 h-80 rounded-full bg-blush-400/15 blur-3xl animate-blob opacity-40"></div>
+      </div>
+
+      {/* Latające serduszka w tle - enhanced */}
       <FloatingHearts />
 
       {/* Interaktywne serduszka reagujące na scroll */}
