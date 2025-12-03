@@ -1,9 +1,46 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Shield, Calendar, MapPin, Star, Award, Verified } from 'lucide-react';
+import { Shield, Calendar, MapPin, Star, Award, Verified, Mic } from 'lucide-react';
 import weryfikacjaImage from '../../assets/weryfikacja.jpg';
+import voiceVerification from '../../assets/weryfikacja.mp3';
 
 const VerificationSection: React.FC = () => {
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const hasPlayedRef = useRef(false);
+
+  useEffect(() => {
+    const audioElement = audioRef.current;
+    const sectionElement = sectionRef.current;
+    if (!audioElement || !sectionElement) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasPlayedRef.current) {
+            // Próba odtworzenia audio gdy sekcja jest widoczna
+            audioElement.play().then(() => {
+              hasPlayedRef.current = true;
+              console.log('Głosówka odtworzona automatycznie');
+            }).catch((error) => {
+              console.log('Autoplay zablokowany przez przeglądarkę:', error);
+            });
+          }
+        });
+      },
+      {
+        threshold: 0.3, // Odtwórz gdy 30% sekcji jest widoczne
+        rootMargin: '0px'
+      }
+    );
+
+    observer.observe(sectionElement);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -53,11 +90,20 @@ const VerificationSection: React.FC = () => {
       bgColor: "bg-purple-400/10",
       borderColor: "border-purple-400/20",
       glowColor: "shadow-purple-400/10"
+    },
+    {
+      icon: Mic,
+      title: "Głos zweryfikowany",
+      description: "Mój głos został potwierdzony przez weryfikację głosową. Posłuchaj poniżej mojej autentycznej wiadomości głosowej.",
+      color: "text-pink-400",
+      bgColor: "bg-pink-400/10",
+      borderColor: "border-pink-400/20",
+      glowColor: "shadow-pink-400/10"
     }
   ];
 
   return (
-    <section className="py-16 md:py-20 lg:py-24 px-4 relative overflow-hidden">
+    <section ref={sectionRef} className="py-16 md:py-20 lg:py-24 px-4 relative overflow-hidden">
 
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Header */}
@@ -68,7 +114,7 @@ const VerificationSection: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -78,8 +124,8 @@ const VerificationSection: React.FC = () => {
             <Verified className="w-5 h-5 text-green-400" />
             <span className="text-sm font-medium text-white">Verified Identity</span>
           </motion.div>
-          
-          <motion.h2 
+
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -87,11 +133,11 @@ const VerificationSection: React.FC = () => {
             className="text-4xl md:text-5xl font-bold mb-6"
           >
             <span className="bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent animate-gradient">
-             TOŻSAMOŚĆ ZWERYFIKOWANA
+              TOŻSAMOŚĆ ZWERYFIKOWANA
             </span>
           </motion.h2>
 
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -101,14 +147,14 @@ const VerificationSection: React.FC = () => {
           </motion.p>
 
           {/* Trust badges */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.5 }}
             className="flex flex-wrap justify-center gap-4 mt-8"
           >
-            <motion.div 
+            <motion.div
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
               className="flex items-center bg-green-400/10 rounded-full px-4 py-2 hover:bg-green-400/20 transition-all duration-300 rainbow-border-full"
@@ -116,7 +162,7 @@ const VerificationSection: React.FC = () => {
               <Award className="w-4 h-4 text-green-400 mr-2" />
               <span className="text-green-400 text-sm font-medium">Zaufany Profil</span>
             </motion.div>
-            <motion.div 
+            <motion.div
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
               className="flex items-center bg-blue-400/10 rounded-full px-4 py-2 hover:bg-blue-400/20 transition-all duration-300 rainbow-border-full"
@@ -144,7 +190,7 @@ const VerificationSection: React.FC = () => {
 
             <div className="relative bg-gradient-to-br from-dark-800/80 via-dark-700/80 to-dark-800/80 backdrop-blur-xl rounded-2xl p-6 lg:p-8 h-full transition-all duration-300 rainbow-border-animated rainbow-glow">
               {/* Verification Badge */}
-     
+
 
               <div className="flex items-center mb-6">
                 <div className="w-12 h-12 bg-gradient-to-br from-green-400/20 to-green-500/20 rounded-full flex items-center justify-center mr-4">
@@ -163,7 +209,7 @@ const VerificationSection: React.FC = () => {
                 <div className="absolute bottom-0 left-0 right-0 p-6">
                   <div className="bg-dark-800/90 backdrop-blur-sm rounded-lg p-4 border border-green-400/20">
                     <p className="text-white text-sm font-medium mb-1">
-                      📅 Zdjęcie potwierdzone: 15.10.2025r
+                      📅 Zdjęcie potwierdzone: 10.10.2025r
                     </p>
                   </div>
                 </div>
@@ -219,6 +265,37 @@ const VerificationSection: React.FC = () => {
                   </motion.div>
                 ))}
               </div>
+
+              {/* Voice Verification Player */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                className="mt-6 p-6 bg-gradient-to-r from-pink-400/10 to-purple-400/10 rounded-xl rainbow-border-animated"
+              >
+                <div className="flex items-center mb-4">
+                  <div className="w-10 h-10 bg-pink-400/20 rounded-full flex items-center justify-center mr-3">
+                    <Mic className="w-5 h-5 text-pink-400" />
+                  </div>
+                  <h4 className="text-white font-bold">Wiadomość głosowa</h4>
+                </div>
+                <audio
+                  ref={audioRef}
+                  controls
+                  className="w-full rounded-lg"
+                  style={{
+                    filter: 'hue-rotate(290deg) saturate(1.5)',
+                    height: '40px'
+                  }}
+                >
+                  <source src={voiceVerification} type="audio/mpeg" />
+                  Twoja przeglądarka nie obsługuje odtwarzacza audio.
+                </audio>
+                <p className="text-gray-400 text-xs mt-3 text-center">
+                  🔊 Posłuchaj mojej autentycznej wiadomości głosowej
+                </p>
+              </motion.div>
 
               {/* Trust Score */}
               <div className="mt-8 p-6 bg-gradient-to-r from-neon-pink/10 to-purple-400/10 rounded-xl rainbow-border-animated">

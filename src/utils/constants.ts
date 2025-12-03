@@ -2,8 +2,8 @@
 export const SOCIAL_LINKS = {
   instagram: "https://instagram.com/mayalubicz",
   tiktok: "https://tiktok.com/@mayalubicz",
-  telegram: "https://t.me/mayalubicz",
-  fanvue: "https://www.fanvue.com/mayalubicz",
+  telegram: "https://t.me/+o6EMRisharVkM2E0",
+  twitter: "https://x.com/mayalubicz",
 }
 
 export const EBOOK_SALE_URL = "https://example.com/ebook-maja-lubicz";
@@ -13,6 +13,8 @@ export const PRICING = {
   telegram_vip: 49,
   whatsapp_premium: 99,
   onlyfans: 29,
+  vip_access: 100,
+  diamond_vip: 250,
   vip_1_month: 49,
   vip_3_months: 129,
   vip_lifetime: 299,
@@ -37,24 +39,23 @@ export const PERSONAL_INFO = {
 
 // Subscription Features
 export const SUBSCRIPTION_FEATURES = {
-  vip: [
-    'Codzienne, ekskluzywne treści foto/wideo',
-    'Girlfriend Experience (GFE)',
-    'Nieograniczony sexting i live wideo',
-    'Prywatny numer telefonu i WhatsApp',
-    'Ekskluzywne live streamy i sesje Q&A',
-    'Personalizowane treści na zamówienie',
-    'Dostęp do pełnego archiwum treści (2018-teraz)',
-    'Wczesny dostęp do nowych materiałów',
-    'Priorytetowe odpowiedzi na wiadomości',
-    'Udział w ankietach i decydowanie o treściach',
-    'Prywatne sesje 1-na-1 (za dodatkową opłatą)',
-    'Zaproszenia na ekskluzywne wydarzenia (offline)'
+  free: [
+    'Publiczne posty (Instagram-style)',
+    'Stories i Updates'
   ],
-  premium: [
-    'Dostęp do wszystkich treści premium (oprócz VIP)',
-    'Codzienne zdjęcia i filmy',
-    'Szybkie odpowiedzi na wiadomości prywatne',
-    'Możliwość zamawiania treści (ograniczone)'
+  vip: [
+    'Nielimitowane treści +18 (foto + video)',
+    'Prywatne DM - piszę sama!',
+    'Live Video Sexting',
+    'Custom Content na zamówienie',
+    'GFE (Girlfriend Experience)',
+    '🎁 BONUS: Darmowy Crypto E-book'
+  ],
+  diamond: [
+    'Wszystko z VIP Access',
+    'Priorytetowe odpowiedzi',
+    'Ekskluzywne live streamy',
+    'Mój prywatny numer WhatsApp',
+    'Możliwość spotkań IRL (Warszawa)'
   ]
 }

@@ -152,7 +152,7 @@ const SubscriptionComparisonSection: React.FC = () => {
                     <span className="text-gray-300">{feature}</span>
                   </div>
                 ))}
-                
+
                 {/* What's NOT included */}
                 <div className="pt-4 border-t border-gray-700/50">
                   <h5 className="font-semibold text-gray-400 mb-3">Nie obejmuje:</h5>
@@ -310,11 +310,10 @@ const SubscriptionComparisonSection: React.FC = () => {
                     key={plan.id}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className={`relative p-6 rounded-xl border cursor-pointer transition-all duration-300 ${
-                      plan.popular
+                    className={`relative p-6 rounded-xl border cursor-pointer transition-all duration-300 ${plan.popular
                         ? 'border-neon-pink/50 bg-gradient-to-r from-neon-pink/10 to-neon-purple/10 glow-border'
                         : 'border-gray-600/30 bg-gray-800/30 hover:border-neon-pink/30'
-                    }`}
+                      }`}
                     onClick={() => handlePlanSelect(plan.id)}
                   >
                     {/* Popular Badge */}
@@ -355,8 +354,29 @@ const SubscriptionComparisonSection: React.FC = () => {
                         )}
                       </div>
                     </div>
+
+                    {/* Crypto Ebook Bonus Badge */}
+                    <div className="mt-3 pt-3 border-t border-gray-700/30">
+                      <div className="flex items-center justify-center space-x-2 text-xs">
+                        <span className="text-green-400 font-semibold">🎁</span>
+                        <span className="text-gray-300">+ Darmowy <span className="text-green-400 font-bold">Crypto E-book</span></span>
+                      </div>
+                    </div>
                   </motion.div>
                 ))}
+              </div>
+
+              {/* Global Bonus Info */}
+              <div className="mt-6 p-4 bg-gradient-to-r from-green-400/10 to-emerald-400/10 rounded-xl border border-green-400/20">
+                <div className="flex items-start space-x-3">
+                  <div className="text-2xl">🎁</div>
+                  <div>
+                    <h4 className="text-white font-bold mb-1">BONUS dla każdej subskrypcji!</h4>
+                    <p className="text-sm text-gray-300">
+                      Otrzymasz darmowy <span className="text-green-400 font-semibold">Crypto E-book</span> - mój osobisty przewodnik po świecie kryptowalut, który pomoże Ci zrozumieć podstawy i zacząć zarabiać!
+                    </p>
+                  </div>
+                </div>
               </div>
 
               {/* Modal Footer */}

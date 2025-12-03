@@ -1,0 +1,4 @@
+src/components/sections/PaywallSection.tsx(215,112): error TS2339: Property 'bonus' does not exist on type '{ text: string; included: boolean; } | { text: string; included: boolean; bonus?: undefined; } | { text: string; included: boolean; bonus: boolean; } | { text: string; included: boolean; hot?: undefined; bonus?: undefined; } | { ...; } | { ...; }'.
+  Property 'bonus' does not exist on type '{ text: string; included: boolean; }'.
+src/components/sections/PaywallSection.tsx(217,34): error TS2339: Property 'hot' does not exist on type '{ text: string; included: boolean; } | { text: string; included: boolean; bonus?: undefined; } | { text: string; included: boolean; bonus: boolean; } | { text: string; included: boolean; hot?: undefined; bonus?: undefined; } | { ...; } | { ...; }'.
+  Property 'hot' does not exist on type '{ text: string; included: boolean; }'.

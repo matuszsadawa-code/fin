@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { CheckCircle, Shield, Lock, CreditCard, Cake, Scale, Ruler, Cpu, TrendingUp, Zap, MapPin } from 'lucide-react'
-import heroVideo from '../../assets/0ad446db45234512bad9ac1c738a2a48.webm'
+import heroImage from '../../assets/hero.png'
 
 const PersonalIntro: React.FC = () => {
   const containerVariants = {
@@ -53,7 +53,7 @@ const PersonalIntro: React.FC = () => {
 
   return (
     <section className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 relative overflow-hidden">
-      
+
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
           variants={containerVariants}
@@ -76,14 +76,11 @@ const PersonalIntro: React.FC = () => {
                   {/* Simple Image Container without border */}
                   <div className="relative">
                     <div className="aspect-[3/4] rounded-3xl overflow-hidden relative">
-                    <video
-                       src={heroVideo}
-                       className="w-full h-full object-contain object-center rounded-3xl"
-                       autoPlay
-                       loop
-                       muted
-                       playsInline
-                    />
+                      <img
+                        src={heroImage}
+                        alt="Maja Czereśnia"
+                        className="w-full h-full object-cover object-center rounded-3xl transform scale-110"
+                      />
                     </div>
 
                     {/* Verification Text Label with Icon */}
@@ -103,13 +100,13 @@ const PersonalIntro: React.FC = () => {
                   <div className="absolute bottom-1/4 -right-2 w-2 h-2 bg-neon-purple rounded-full animate-float delay-1500 opacity-50 shadow-lg shadow-neon-purple/40" role="img" aria-label="Dekoracyjny element"></div>
                 </div>
               </motion.div>
-              
+
               <motion.div variants={itemVariants} className="space-y-4 sm:space-y-6 text-sm sm:text-base md:text-lg text-gray-300">
                 <div className="flex items-start gap-3 sm:gap-4">
                   <motion.div
                     className="relative p-2 sm:p-3 rounded-full glass-crypto backdrop-blur-md flex-shrink-0"
-                    whileHover={{ 
-                      scale: 1.05, 
+                    whileHover={{
+                      scale: 1.05,
                       rotate: 360,
                       boxShadow: "0 0 30px rgba(255, 79, 216, 0.4)"
                     }}
@@ -117,10 +114,10 @@ const PersonalIntro: React.FC = () => {
                   >
                     <div className="absolute inset-0 rounded-full bg-gradient-to-r from-neon-pink/30 to-purple-500/30 blur-sm animate-pulse"></div>
                     <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400/20 to-cyan-400/20 blur-md"></div>
-                    <Cpu className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-cyan-400 relative z-10 drop-shadow-lg" style={{filter: 'drop-shadow(0 0 8px rgba(34, 211, 238, 0.6))'}} />
+                    <Cpu className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-cyan-400 relative z-10 drop-shadow-lg" style={{ filter: 'drop-shadow(0 0 8px rgba(34, 211, 238, 0.6))' }} />
                   </motion.div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-base sm:text-lg md:text-xl font-semibold text-cyan-400 mb-1 sm:mb-2" style={{filter: 'drop-shadow(0 0 6px rgba(34, 211, 238, 0.5))'}}>STUDENTKA BLOCKCHAIN</h3>
+                    <h3 className="text-base sm:text-lg md:text-xl font-semibold text-cyan-400 mb-1 sm:mb-2" style={{ filter: 'drop-shadow(0 0 6px rgba(34, 211, 238, 0.5))' }}>STUDENTKA BLOCKCHAIN</h3>
                     <p className="leading-relaxed">Studiuję technologie blockchain na jednej z najlepszych uczelni w Polsce. Dzień spędzam nad kodowaniem, ale wieczory... to już inna historia.</p>
                   </div>
                 </div>
@@ -128,8 +125,8 @@ const PersonalIntro: React.FC = () => {
                 <div className="flex items-start gap-3 sm:gap-4">
                   <motion.div
                     className="relative p-2 sm:p-3 rounded-full glass-trading backdrop-blur-md flex-shrink-0"
-                    whileHover={{ 
-                      scale: 1.05, 
+                    whileHover={{
+                      scale: 1.05,
                       rotate: 360,
                       boxShadow: "0 0 30px rgba(201, 182, 255, 0.4)"
                     }}
@@ -139,7 +136,7 @@ const PersonalIntro: React.FC = () => {
                     <TrendingUp className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-purple-400 relative z-10" />
                   </motion.div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-base sm:text-lg md:text-xl font-semibold text-purple-400 mb-1 sm:mb-2" style={{filter: 'drop-shadow(0 0 6px rgba(168, 85, 247, 0.5))'}}>FANKA CRYPTO & TRADINGU</h3>
+                    <h3 className="text-base sm:text-lg md:text-xl font-semibold text-purple-400 mb-1 sm:mb-2" style={{ filter: 'drop-shadow(0 0 6px rgba(168, 85, 247, 0.5))' }}>FANKA CRYPTO & TRADINGU</h3>
                     <p className="leading-relaxed">Pasjonuję się kryptowalutami i tradingiem. Moja pewność siebie w inwestycjach może być... zaraźliwa.</p>
                   </div>
                 </div>
@@ -147,8 +144,8 @@ const PersonalIntro: React.FC = () => {
                 <div className="flex items-start gap-3 sm:gap-4">
                   <motion.div
                     className="relative p-2 sm:p-3 rounded-full glass-nsfw backdrop-blur-md flex-shrink-0"
-                    whileHover={{ 
-                      scale: 1.05, 
+                    whileHover={{
+                      scale: 1.05,
                       rotate: 360,
                       boxShadow: "0 0 30px rgba(236, 72, 153, 0.4)"
                     }}
@@ -158,7 +155,7 @@ const PersonalIntro: React.FC = () => {
                     <Zap className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-pink-400 relative z-10" />
                   </motion.div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-base sm:text-lg md:text-xl font-semibold text-pink-400 mb-1 sm:mb-2" style={{filter: 'drop-shadow(0 0 6px rgba(244, 114, 182, 0.5))'}}>AKTYWNA I SUMIENNA</h3>
+                    <h3 className="text-base sm:text-lg md:text-xl font-semibold text-pink-400 mb-1 sm:mb-2" style={{ filter: 'drop-shadow(0 0 6px rgba(244, 114, 182, 0.5))' }}>AKTYWNA I SUMIENNA</h3>
                     <p className="leading-relaxed">Codziennie aktywna, zawsze odpowiadam na wiadomości. Moi fani wiedzą, że mogą na mnie liczyć.</p>
                   </div>
                 </div>
@@ -181,17 +178,17 @@ const PersonalIntro: React.FC = () => {
               <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon-pink/40 to-transparent animate-pulse"></div>
               <div className="text-center group">
                 <div className="flex items-center justify-center mb-3">
-                  <motion.div 
+                  <motion.div
                     className="bg-gradient-to-br from-pink-500/20 via-purple-500/20 to-blue-500/20 p-3 rounded-full group-hover:from-pink-500/30 group-hover:via-purple-500/30 group-hover:to-blue-500/30 transition-all duration-300 shadow-lg"
                     style={{
                       boxShadow: '0 0 20px rgba(236, 72, 153, 0.3), 0 0 40px rgba(147, 51, 234, 0.2), 0 0 60px rgba(59, 130, 246, 0.1)'
                     }}
-                    whileHover={{ 
-                      scale: 1.15, 
+                    whileHover={{
+                      scale: 1.15,
                       rotate: [0, -15, 15, -15, 0],
                       boxShadow: "0 0 30px rgba(236, 72, 153, 0.5), 0 0 50px rgba(147, 51, 234, 0.4), 0 0 70px rgba(59, 130, 246, 0.3)"
                     }}
-                    transition={{ 
+                    transition={{
                       rotate: { duration: 0.8, ease: "easeInOut" },
                       scale: { duration: 0.3 },
                       boxShadow: { duration: 0.4 }
@@ -218,17 +215,17 @@ const PersonalIntro: React.FC = () => {
               </div>
               <div className="text-center group">
                 <div className="flex items-center justify-center mb-3">
-                  <motion.div 
+                  <motion.div
                     className="bg-gradient-to-br from-green-500/20 via-emerald-500/20 to-teal-500/20 p-3 rounded-full group-hover:from-green-500/30 group-hover:via-emerald-500/30 group-hover:to-teal-500/30 transition-all duration-300 shadow-lg"
                     style={{
                       boxShadow: '0 0 20px rgba(34, 197, 94, 0.3), 0 0 40px rgba(16, 185, 129, 0.2), 0 0 60px rgba(20, 184, 166, 0.1)'
                     }}
-                    whileHover={{ 
+                    whileHover={{
                       scale: 1.15,
                       y: [-3, 3, -3, 3, 0],
                       boxShadow: "0 0 30px rgba(34, 197, 94, 0.5), 0 0 50px rgba(16, 185, 129, 0.4), 0 0 70px rgba(20, 184, 166, 0.3)"
                     }}
-                    transition={{ 
+                    transition={{
                       y: { duration: 1, ease: "easeInOut" },
                       scale: { duration: 0.3 },
                       boxShadow: { duration: 0.4 }
@@ -256,17 +253,17 @@ const PersonalIntro: React.FC = () => {
               </div>
               <div className="text-center group">
                 <div className="flex items-center justify-center mb-3">
-                  <motion.div 
+                  <motion.div
                     className="bg-gradient-to-br from-orange-500/20 via-red-500/20 to-pink-500/20 p-3 rounded-full group-hover:from-orange-500/30 group-hover:via-red-500/30 group-hover:to-pink-500/30 transition-all duration-300 shadow-lg"
                     style={{
                       boxShadow: '0 0 20px rgba(249, 115, 22, 0.3), 0 0 40px rgba(239, 68, 68, 0.2), 0 0 60px rgba(236, 72, 153, 0.1)'
                     }}
-                    whileHover={{ 
+                    whileHover={{
                       scale: 1.15,
                       rotate: [0, 20, -20, 0],
                       boxShadow: "0 0 30px rgba(249, 115, 22, 0.5), 0 0 50px rgba(239, 68, 68, 0.4), 0 0 70px rgba(236, 72, 153, 0.3)"
                     }}
-                    transition={{ 
+                    transition={{
                       rotate: { duration: 0.6, ease: "easeInOut" },
                       scale: { duration: 0.3 },
                       boxShadow: { duration: 0.4 }
@@ -294,17 +291,17 @@ const PersonalIntro: React.FC = () => {
               </div>
               <div className="text-center group">
                 <div className="flex items-center justify-center mb-3">
-                  <motion.div 
+                  <motion.div
                     className="bg-gradient-to-br from-purple-500/20 via-indigo-500/20 to-green-500/20 p-3 rounded-full group-hover:from-purple-500/30 group-hover:via-indigo-500/30 group-hover:to-green-500/30 transition-all duration-300 shadow-lg"
                     style={{
                       boxShadow: '0 0 20px rgba(147, 51, 234, 0.3), 0 0 40px rgba(99, 102, 241, 0.2), 0 0 60px rgba(34, 197, 94, 0.1)'
                     }}
-                    whileHover={{ 
+                    whileHover={{
                       scale: 1.2,
                       rotate: [0, 360],
                       boxShadow: "0 0 35px rgba(147, 51, 234, 0.6), 0 0 55px rgba(99, 102, 241, 0.5), 0 0 75px rgba(34, 197, 94, 0.4)"
                     }}
-                    transition={{ 
+                    transition={{
                       rotate: { duration: 1.2, ease: "easeInOut" },
                       scale: { duration: 0.3 },
                       boxShadow: { duration: 0.4 }
@@ -321,9 +318,9 @@ const PersonalIntro: React.FC = () => {
                     </div>
                   </motion.div>
                 </div>
-                <motion.div 
+                <motion.div
                   className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2 drop-shadow-lg"
-                  animate={{ 
+                  animate={{
                     textShadow: [
                       "0 0 15px rgba(147, 51, 234, 0.6)",
                       "0 0 25px rgba(99, 102, 241, 0.8)",
@@ -332,10 +329,10 @@ const PersonalIntro: React.FC = () => {
                       "0 0 15px rgba(147, 51, 234, 0.6)"
                     ]
                   }}
-                  transition={{ 
-                    duration: 3, 
-                    repeat: Infinity, 
-                    ease: "easeInOut" 
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut"
                   }}
                   style={{
                     background: 'linear-gradient(45deg, #8b5cf6, #6366f1, #22c55e)',
@@ -357,13 +354,13 @@ const PersonalIntro: React.FC = () => {
               {/* Enhanced glassmorphism border with multiple layers */}
               <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-gold/60 to-transparent"></div>
               <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-purple-400/40 via-neon-pink/60 to-cyan-400/40 animate-pulse"></div>
-              
+
               {/* Animated flowing border effect */}
-              <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-gold/80 to-transparent animate-pulse" style={{animationDelay: '0.5s'}}></div>
-              
+              <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-gold/80 to-transparent animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+
               {/* Glow effect behind the border */}
               <div className="absolute -top-2 left-0 right-0 h-4 bg-gradient-to-r from-transparent via-gold/20 to-transparent blur-sm"></div>
-       
+
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 md:gap-4">
                 {trustCertificates.map((certificate, index) => (
@@ -379,31 +376,31 @@ const PersonalIntro: React.FC = () => {
                   >
                     {/* Enhanced glassmorphism border glow */}
                     <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-gold/10 via-transparent to-neon-pink/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    
+
                     {/* Animated border shimmer effect */}
                     <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-transparent via-gold/30 to-transparent opacity-0 group-hover:opacity-100 animate-pulse transition-opacity duration-500"></div>
-                    
+
                     {/* Inner glow effect */}
                     <div className="absolute inset-[1px] rounded-xl bg-gradient-to-br from-dark-800/90 to-dark-700/90 backdrop-blur-xl"></div>
-                    
+
                     {/* Content wrapper with higher z-index */}
                     <div className="relative z-10 flex flex-col items-center w-full h-full">
-                    <div 
-                      className={`${certificate.color} ${certificate.bgColor} p-2 sm:p-2.5 md:p-3 rounded-full flex-shrink-0 group-hover:scale-110 transition-transform duration-300 mb-1.5 sm:mb-2 md:mb-3 shadow-lg`}
-                      style={
-                        certificate.text === "Bezpieczne Płatności" 
-                          ? {
+                      <div
+                        className={`${certificate.color} ${certificate.bgColor} p-2 sm:p-2.5 md:p-3 rounded-full flex-shrink-0 group-hover:scale-110 transition-transform duration-300 mb-1.5 sm:mb-2 md:mb-3 shadow-lg`}
+                        style={
+                          certificate.text === "Bezpieczne Płatności"
+                            ? {
                               filter: 'drop-shadow(0 0 8px rgba(255, 212, 0, 0.4)) drop-shadow(0 0 16px rgba(236, 72, 153, 0.3))',
                               animation: 'pulse 2s infinite'
                             }
-                          : {}
-                      }
-                    >
-                      <certificate.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5" />
-                    </div>
-                    <span className="text-[10px] sm:text-xs md:text-sm text-gray-200 font-medium leading-tight group-hover:text-white transition-colors duration-300 px-1">
-                      {certificate.text}
-                    </span>
+                            : {}
+                        }
+                      >
+                        <certificate.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5" />
+                      </div>
+                      <span className="text-[10px] sm:text-xs md:text-sm text-gray-200 font-medium leading-tight group-hover:text-white transition-colors duration-300 px-1">
+                        {certificate.text}
+                      </span>
                     </div>
                   </motion.div>
                 ))}
@@ -420,13 +417,10 @@ const PersonalIntro: React.FC = () => {
               {/* Simple Image Container without border */}
               <div className="relative">
                 <div className="aspect-[3/4] rounded-3xl overflow-hidden relative">
-                  <video
-                     src={heroVideo}
-                     className="w-full h-full object-contain object-center rounded-3xl"
-                     autoPlay
-                     loop
-                     muted
-                     playsInline
+                  <img
+                    src={heroImage}
+                    alt="Maja Czereśnia"
+                    className="w-full h-full object-cover object-center rounded-3xl transform scale-90"
                   />
                 </div>
 

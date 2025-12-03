@@ -4,7 +4,7 @@ import { X, Users, UserPlus, Wifi, BookOpen, Crown } from 'lucide-react'
 
 interface ActivityMessage {
   id: string
-  type: 'online' | 'viewers' | 'ebookPurchase' | 'fanvueSubscription' | 'newFan' | 'fanvueSubscriptionMonths'
+  type: 'online' | 'viewers' | 'ebookPurchase' | 'vipSubscription' | 'newFan' | 'vipSubscriptionMonths'
   message: string
   icon: React.ReactNode
   color: string
@@ -18,25 +18,21 @@ const RealTimeActivityWidget: React.FC = () => {
   const [isMinimized, setIsMinimized] = useState(false)
   const [isBurstMode, setIsBurstMode] = useState(false)
   const [burstCount, setBurstCount] = useState(0)
-  const [nextInterval, setNextInterval] = useState(45000) // Następny interwał w ms (45s)
+  const [nextInterval, setNextInterval] = useState(45000)
   const [isSilentPeriod, setIsSilentPeriod] = useState(false)
   const [silentDuration, setSilentDuration] = useState(0)
   const [isMajaOnline, setIsMajaOnline] = useState(true)
   const [lastActivityTime, setLastActivityTime] = useState(new Date())
 
-  // Generowanie realistycznych danych
   const generateRandomViewers = () => {
     const hour = new Date().getHours()
     let baseViewers = 25
     let maxViewers = 150
 
-    // Więcej oglądających wieczorem i w nocy
     if ((hour >= 18 && hour <= 23) || (hour >= 0 && hour <= 2)) {
       baseViewers = 45
       maxViewers = 180
-    }
-    // Mniej oglądających rano
-    else if (hour >= 6 && hour <= 12) {
+    } else if (hour >= 6 && hour <= 12) {
       baseViewers = 15
       maxViewers = 80
     }
@@ -44,9 +40,6 @@ const RealTimeActivityWidget: React.FC = () => {
     return Math.floor(Math.random() * (maxViewers - baseViewers + 1)) + baseViewers
   }
 
-
-
-  // Rozszerzona lista polskich imion (męskich i żeńskich)
   const polishMaleNames = [
     'Michał', 'Paweł', 'Jakub', 'Tomasz', 'Łukasz', 'Adam', 'Mateusz', 'Kamil',
     'Krzysztof', 'Marcin', 'Piotr', 'Bartosz', 'Maciej', 'Dawid', 'Rafał',
@@ -64,7 +57,6 @@ const RealTimeActivityWidget: React.FC = () => {
 
   const allPolishNames = [...polishMaleNames, ...polishFemaleNames]
 
-  // Rozszerzona lista polskich miast (duże i średnie miasta)
   const polishCities = [
     'Warszawa', 'Kraków', 'Gdańsk', 'Wrocław', 'Poznań', 'Łódź', 'Katowice',
     'Szczecin', 'Bydgoszcz', 'Lublin', 'Białystok', 'Toruń', 'Rzeszów',
@@ -144,7 +136,7 @@ const RealTimeActivityWidget: React.FC = () => {
     const shouldBeOnline = Math.random() < onlineProbability
 
     if (shouldBeOnline !== isMajaOnline) {
-        setIsMajaOnline(shouldBeOnline)
+      setIsMajaOnline(shouldBeOnline)
       if (!shouldBeOnline) {
         setLastActivityTime(new Date())
       }
@@ -155,25 +147,36 @@ const RealTimeActivityWidget: React.FC = () => {
     const name = getRandomName();
     const city = getRandomCity();
     const messages = [
-      `🔥 ${name} z ${city} zakupił e-book! Gratulacje!`, `🚀 ${name} (${city}) zainwestował w wiedzę!`, `📚 ${name} kupił przewodnik o krypto!`, `✨ Nowy czytelnik: ${name} z ${city}!`
+      `📚 ${name} z ${city} właśnie kupił e-book o krypto!`,
+      `🚀 ${name} (${city}) zainwestował w wiedzę - brawo!`,
+      `💡 ${name} kupił przewodnik po kryptowalutach!`,
+      `✨ Nowy czytelnik: ${name} z ${city} rozpoczyna przygodę z krypto!`,
+      `🔥 ${name} (${city}) właśnie pobrał mojego e-booka!`
     ];
     return messages[Math.floor(Math.random() * messages.length)];
   };
 
-  const getFanvueSubscriptionMessage = () => {
+  const getVipSubscriptionMessage = () => {
     const name = getRandomName();
     const messages = [
-      `💖 ${name} zasubskrybował do Fanvue! Witamy!`, `🎉 ${name} dołączył do Fanvue!`, `🌟 Nowy subskrybent: ${name}!`, `💕 ${name} został fanem!`, `🔥 ${name} wykupił dostęp Fanvue!`
+      `💖 ${name} dołączył do VIP - witaj w rodzince!`,
+      `🎉 ${name} właśnie zasubskrybował VIP!`,
+      `🌟 ${name} został moim subskrybentem - dzięki!`,
+      `💕 ${name} teraz ma pełen dostęp do ekskluzywnych treści!`,
+      `🔥 ${name} wykupił dostęp VIP - super wybór!`
     ];
     return messages[Math.floor(Math.random() * messages.length)];
   };
 
-  const getFanvueSubscriptionMonthsMessage = () => {
+  const getVipSubscriptionMonthsMessage = () => {
     const name = getRandomName();
-    const months = [1, 3, 6, 12];
+    const months = [1, 3, 6];
     const randomMonths = months[Math.floor(Math.random() * months.length)];
     const messages = [
-      `👑 ${name} wykupił subskrypcję Fanvue na ${randomMonths} miesiące!`, `💎 ${name} subskrybuje Fanvue przez ${randomMonths} miesiące!`, `✨ ${name} wybrał plan ${randomMonths}-miesięczny Fanvue!`
+      `👑 ${name} wykupił subskrypcję na ${randomMonths} ${randomMonths === 1 ? 'miesiąc' : 'miesiące'}!`,
+      `💎 ${name} wybrał plan ${randomMonths}-miesięczny VIP - mega!`,
+      `✨ ${name} zasubskrybował na ${randomMonths} ${randomMonths === 1 ? 'miesiąc' : 'miesiące'} - wow!`,
+      `🚀 ${name} został VIP na ${randomMonths} ${randomMonths === 1 ? 'miesiąc' : 'miesiące'}!`
     ];
     return messages[Math.floor(Math.random() * messages.length)];
   };
@@ -181,7 +184,10 @@ const RealTimeActivityWidget: React.FC = () => {
   const getNewFanMessage = () => {
     const name = getRandomName();
     const messages = [
-      `❤️ ${name} dołączył do grona fanów!`, `👋 ${name} został nowym fanem!`, `🌟 ${name} jest teraz moim fanem!`
+      `❤️ ${name} właśnie dołączył do grona fanów!`,
+      `👋 ${name} został moim nowym fanem - cześć!`,
+      `🌟 ${name} też już jest moim fanem!`,
+      `💕 ${name} obserwuje profil - witaj!`
     ];
     return messages[Math.floor(Math.random() * messages.length)];
   };
@@ -189,7 +195,10 @@ const RealTimeActivityWidget: React.FC = () => {
   const getViewersMessage = () => {
     const count = generateRandomViewers();
     const messages = [
-      `👀 W tej chwili profil ogląda ${count} osób.`, `🔥 Obecnie online: ${count} fanów.`, `📱 Teraz ogląda nas ${count} widzów.`
+      `👀 W tej chwili profil ogląda ${count} osób!`,
+      `🔥 Aktualnie online: ${count} fanów.`,
+      `📱 Teraz ogląda nas ${count} widzów.`,
+      `✨ Profil ma teraz ${count} aktywnych użytkowników!`
     ];
     return messages[Math.floor(Math.random() * messages.length)];
   };
@@ -198,7 +207,7 @@ const RealTimeActivityWidget: React.FC = () => {
     {
       id: 'online',
       type: 'online',
-      message: isMajaOnline ? 'Maja jest teraz online 🟢' : 'Maja jest offline 🔴',
+      message: isMajaOnline ? 'Maja jest właśnie online 🟢' : 'Maja jest teraz offline 🔴',
       icon: <Wifi className="w-4 h-4" />,
       color: isMajaOnline ? 'text-green-400' : 'text-red-400',
       priority: 'high',
@@ -223,18 +232,18 @@ const RealTimeActivityWidget: React.FC = () => {
       probability: 0.4
     },
     {
-      id: 'fanvueSubscription',
-      type: 'fanvueSubscription',
-      message: getFanvueSubscriptionMessage(),
+      id: 'vipSubscription',
+      type: 'vipSubscription',
+      message: getVipSubscriptionMessage(),
       icon: <UserPlus className="w-4 h-4" />,
       color: 'text-green-400',
       priority: 'high',
       probability: 0.7
     },
     {
-      id: 'fanvueSubscriptionMonths',
-      type: 'fanvueSubscriptionMonths',
-      message: getFanvueSubscriptionMonthsMessage(),
+      id: 'vipSubscriptionMonths',
+      type: 'vipSubscriptionMonths',
+      message: getVipSubscriptionMonthsMessage(),
       icon: <Crown className="w-4 h-4" />,
       color: 'text-purple-400',
       priority: 'high',
@@ -251,20 +260,17 @@ const RealTimeActivityWidget: React.FC = () => {
     }
   ])
 
-  // Realistyczna rotacja komunikatów z dynamicznymi interwałami
   useEffect(() => {
     if (!isVisible || isMinimized) return
 
     const scheduleNextMessage = () => {
       const timeout = setTimeout(() => {
-        // Sprawdź czy rozpocząć okres ciszy
         if (!isSilentPeriod && !isBurstMode && shouldTriggerSilentPeriod()) {
           setIsSilentPeriod(true)
           const duration = getSilentPeriodDuration()
           setSilentDuration(duration)
           setNextInterval(duration)
 
-          // Zakończ okres ciszy po określonym czasie
           setTimeout(() => {
             setIsSilentPeriod(false)
             setSilentDuration(0)
@@ -274,29 +280,25 @@ const RealTimeActivityWidget: React.FC = () => {
           return
         }
 
-        // Jeśli jesteśmy w okresie ciszy, pomiń tę iterację
         if (isSilentPeriod) {
           scheduleNextMessage()
           return
         }
 
-        // Sprawdź czy rozpocząć burst aktywności
         if (!isBurstMode && shouldTriggerBurst()) {
           setIsBurstMode(true)
-          setBurstCount(2 + Math.floor(Math.random() * 2)) // 2-3 wiadomości w burst
-          setNextInterval(8000) // Szybsze interwały podczas burst (8s)
+          setBurstCount(2 + Math.floor(Math.random() * 2))
+          setNextInterval(8000)
         } else if (isBurstMode && burstCount > 0) {
           setBurstCount(prev => prev - 1)
-          setNextInterval(5000 + Math.random() * 5000) // 5-10s podczas burst
+          setNextInterval(5000 + Math.random() * 5000)
         } else if (isBurstMode && burstCount <= 0) {
           setIsBurstMode(false)
           setNextInterval(getRandomInterval())
         } else {
-          // Normalna rotacja
           setNextInterval(getRandomInterval())
         }
 
-        // Wybierz następną wiadomość na podstawie prawdopodobieństwa i spójności
         let nextIndex = currentMessageIndex
         let attempts = 0
         let isLogicallyValid = true
@@ -305,11 +307,9 @@ const RealTimeActivityWidget: React.FC = () => {
           nextIndex = Math.floor(Math.random() * messages.length)
           attempts++
 
-          // Sprawdź spójność logiczną
           const message = messages[nextIndex]
           isLogicallyValid = true
 
-          // Jeśli Laura jest online, nie pokazuj "ostatnia aktywność" z dużym opóźnieniem
           if (isMajaOnline && (message.type === 'online' && message.message.includes('offline'))) {
             isLogicallyValid = false
           }
@@ -322,12 +322,10 @@ const RealTimeActivityWidget: React.FC = () => {
 
         setCurrentMessageIndex(nextIndex)
 
-        // Aktualizuj status online/offline co jakiś czas
         if (Math.random() > 0.9) {
           updateOnlineStatus()
         }
 
-        // Aktualizacja losowych wartości z nowymi funkcjami (rzadziej)
         if (Math.random() > 0.85) {
           setMessages(prev => prev.map(msg => {
             if (msg.type === 'viewers') {
@@ -336,11 +334,11 @@ const RealTimeActivityWidget: React.FC = () => {
             if (msg.type === 'ebookPurchase') {
               return { ...msg, message: getEbookPurchaseMessage() }
             }
-            if (msg.type === 'fanvueSubscription') {
-              return { ...msg, message: getFanvueSubscriptionMessage() }
+            if (msg.type === 'vipSubscription') {
+              return { ...msg, message: getVipSubscriptionMessage() }
             }
-            if (msg.type === 'fanvueSubscriptionMonths') {
-              return { ...msg, message: getFanvueSubscriptionMonthsMessage() }
+            if (msg.type === 'vipSubscriptionMonths') {
+              return { ...msg, message: getVipSubscriptionMonthsMessage() }
             }
             if (msg.type === 'newFan') {
               return { ...msg, message: getNewFanMessage() }
@@ -348,7 +346,7 @@ const RealTimeActivityWidget: React.FC = () => {
             if (msg.type === 'online') {
               return {
                 ...msg,
-                message: isMajaOnline ? 'Maja jest teraz online 🟢' : 'Maja jest offline 🔴',
+                message: isMajaOnline ? 'Maja jest właśnie online 🟢' : 'Maja jest teraz offline 🔴',
                 color: isMajaOnline ? 'text-green-400' : 'text-red-400'
               }
             }
@@ -366,11 +364,11 @@ const RealTimeActivityWidget: React.FC = () => {
     return () => clearTimeout(timeout)
   }, [isVisible, isMinimized, currentMessageIndex, nextInterval, isBurstMode, burstCount, isSilentPeriod, silentDuration, isMajaOnline, lastActivityTime, messages])
 
-  // Animacje dla komponentu
+  // Animacje - widget wchodzi z prawej
   const widgetVariants = {
     hidden: {
       opacity: 0,
-      x: -100,
+      x: 100,
       scale: 0.8
     },
     visible: {
@@ -385,7 +383,7 @@ const RealTimeActivityWidget: React.FC = () => {
     },
     exit: {
       opacity: 0,
-      x: -100,
+      x: 100,
       scale: 0.8,
       transition: {
         duration: 0.3
@@ -447,7 +445,7 @@ const RealTimeActivityWidget: React.FC = () => {
         initial="hidden"
         animate="visible"
         exit="exit"
-        className="fixed bottom-16 sm:bottom-4 left-4 md:bottom-6 md:left-6 z-40 max-w-[calc(100vw-2rem)] md:max-w-none"
+        className="fixed top-20 right-4 md:top-24 md:right-6 z-40 max-w-[calc(100vw-2rem)] md:max-w-none"
       >
         <motion.div
           variants={minimizedVariants}
@@ -466,7 +464,6 @@ const RealTimeActivityWidget: React.FC = () => {
           }}
         >
           {isMinimized ? (
-            // Minimized state - tylko ikona
             <motion.div
               animate={{ scale: [1, 1.1, 1] }}
               transition={{ duration: 2, repeat: Infinity, type: "tween", ease: "easeInOut" }}
@@ -475,63 +472,62 @@ const RealTimeActivityWidget: React.FC = () => {
               <Wifi className="w-6 h-6" />
             </motion.div>
           ) : (
-            // Expanded state - pełny widget
             <div className="p-3 md:p-4">
-              {/* Header z przyciskami */}
               <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-2">
-                    <motion.div 
-                      className={`
+                <div className="flex items-center gap-2">
+                  <motion.div
+                    className={`
                         w-2 h-2 rounded-full
                         ${isSilentPeriod
-                          ? 'bg-gray-400'
-                          : isBurstMode
-                            ? 'bg-red-400'
-                            : 'bg-green-400'
-                        }
-                      `}
-                      animate={
-                        isSilentPeriod
-                          ? { opacity: [0.5, 1, 0.5] }
-                          : isBurstMode
-                            ? { scale: [1, 1.2, 1], opacity: [1, 0.7, 1] }
-                            : { opacity: [0.7, 1, 0.7] }
+                        ? 'bg-gray-400'
+                        : isBurstMode
+                          ? 'bg-red-400'
+                          : 'bg-green-400'
                       }
-                      transition={{
-                        duration: isBurstMode ? 0.6 : 2,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                      }}
-                    />
-                    <span className="text-xs font-semibold activity-header-text uppercase tracking-wide">
-                      {isSilentPeriod ? 'Quiet Time' : isBurstMode ? 'High Activity' : 'Live Activity'}
-                    </span>
-                  </div>
+                      `}
+                    animate={
+                      isSilentPeriod
+                        ? { opacity: [0.5, 1, 0.5] }
+                        : isBurstMode
+                          ? { scale: [1, 1.2, 1], opacity: [1, 0.7, 1] }
+                          : { opacity: [0.7, 1, 0.7] }
+                    }
+                    transition={{
+                      duration: isBurstMode ? 0.6 : 2,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  />
+                  <span className="text-xs font-semibold activity-header-text uppercase tracking-wide">
+                    {isSilentPeriod ? 'Quiet Time' : isBurstMode ? 'High Activity' : 'Live Activity'}
+                  </span>
+                </div>
                 <div className="flex items-center gap-1">
                   <button
                     onClick={(e) => {
                       e.stopPropagation()
                       setIsMinimized(true)
                     }}
-                    className="w-6 h-6 flex items-center justify-center rounded-full hover:bg-gray-700/50 transition-colors"
+                    className="w-7 h-7 flex items-center justify-center rounded-full bg-gray-700/30 hover:bg-gray-600/60 transition-all duration-200 hover:scale-110"
                     title="Minimize"
+                    aria-label="Minimize widget"
                   >
-                    <div className="w-3 h-0.5 bg-gray-400"></div>
+                    <div className="w-3.5 h-0.5 bg-gray-300 hover:bg-white"></div>
                   </button>
                   <button
                     onClick={(e) => {
                       e.stopPropagation()
                       setIsVisible(false)
                     }}
-                    className="w-6 h-6 flex items-center justify-center rounded-full hover:bg-gray-700/50 transition-colors"
+                    className="w-7 h-7 flex items-center justify-center rounded-full bg-gray-700/30 hover:bg-red-500/60 transition-all duration-200 hover:scale-110"
                     title="Close"
+                    aria-label="Close widget"
                   >
-                    <X className="w-3 h-3 text-gray-400" />
+                    <X className="w-3.5 h-3.5 text-gray-300 hover:text-white" />
                   </button>
                 </div>
               </div>
 
-              {/* Komunikat z animacją i avatarem */}
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentMessage.id}
@@ -541,13 +537,11 @@ const RealTimeActivityWidget: React.FC = () => {
                   exit="exit"
                   className="flex items-start gap-3"
                 >
-                  {/* Avatar lub ikona */}
                   <div className="flex-shrink-0">
                     {(currentMessage.type === 'ebookPurchase' ||
-                      currentMessage.type === 'fanvueSubscription' ||
-                      currentMessage.type === 'fanvueSubscriptionMonths' ||
+                      currentMessage.type === 'vipSubscription' ||
+                      currentMessage.type === 'vipSubscriptionMonths' ||
                       currentMessage.type === 'newFan') ? (
-                      // Avatar dla powiadomień z użytkownikami
                       <motion.div
                         animate={currentMessage.priority === 'high' ? {
                           scale: [1, 1.1, 1],
@@ -567,7 +561,6 @@ const RealTimeActivityWidget: React.FC = () => {
                         {getInitials(currentMessage.message.split(' ')[0] || 'U')}
                       </motion.div>
                     ) : (
-                      // Ikona dla innych typów powiadomień
                       <motion.div
                         animate={currentMessage.priority === 'high' ? {
                           scale: [1, 1.2, 1],
@@ -584,8 +577,7 @@ const RealTimeActivityWidget: React.FC = () => {
                     )}
                   </div>
 
-                  {/* Treść wiadomości */}
-                  <motion.div 
+                  <motion.div
                     className="flex-1 min-w-0 activity-content-bg"
                     initial={{ opacity: 0, y: 5 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -598,7 +590,7 @@ const RealTimeActivityWidget: React.FC = () => {
                     >
                       {currentMessage.message}
                     </motion.p>
-                    <motion.p 
+                    <motion.p
                       className="text-xs activity-text-secondary mt-1"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
@@ -607,7 +599,6 @@ const RealTimeActivityWidget: React.FC = () => {
                       Teraz
                     </motion.p>
 
-                    {/* Znacznik priorytetu */}
                     {currentMessage.priority === 'high' && (
                       <motion.div
                         initial={{ opacity: 0, scale: 0 }}
@@ -622,15 +613,14 @@ const RealTimeActivityWidget: React.FC = () => {
                 </motion.div>
               </AnimatePresence>
 
-              {/* Progress indicator */}
               <div className="mt-3 flex gap-1">
                 {messages.map((_, index) => (
                   <div
                     key={index}
                     className={`
                       h-1 rounded-full transition-all duration-300
-                      ${index === currentMessageIndex 
-                        ? 'bg-neon-pink flex-1' 
+                      ${index === currentMessageIndex
+                        ? 'bg-neon-pink flex-1'
                         : 'bg-gray-600 w-1'
                       }
                     `}
@@ -641,9 +631,8 @@ const RealTimeActivityWidget: React.FC = () => {
           )}
         </motion.div>
 
-        {/* Animated Rainbow Glow Effect - More Subtle */}
-        <motion.div 
-          className="absolute inset-0 rounded-2xl opacity-30 blur-lg -z-10"
+        <motion.div
+          className="absolute inset-0 rounded-2xl opacity-30 blur-lg -z-10 pointer-events-none"
           animate={{
             background: [
               'linear-gradient(45deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.15), rgba(251, 191, 36, 0.1))',
@@ -660,8 +649,7 @@ const RealTimeActivityWidget: React.FC = () => {
           }}
         />
 
-        {/* Inner Glow Effect - More Subtle */}
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-pink-500/5 to-orange-500/5 rounded-2xl opacity-60"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-pink-500/5 to-orange-500/5 rounded-2xl opacity-60 pointer-events-none"></div>
       </motion.div>
     </AnimatePresence>
   )

@@ -1,9 +1,305 @@
 import React from 'react'
+import { motion } from 'framer-motion'
+import { Crown, Sparkles, Shield, Lock, Check, Heart } from 'lucide-react'
+import { SOCIAL_LINKS } from '../../utils/constants'
+import { useCountdownTimer } from '../../hooks/useCountdownTimer'
+
+interface PricingFeature {
+  text: string
+  included: boolean
+  bonus?: boolean
+  hot?: boolean
+}
+
+interface PricingTier {
+  id: string
+  name: string
+  price: string
+  originalPrice?: string
+  savings?: string
+  icon: any
+  gradient: string
+  borderColor: string
+  textColor: string
+  popular?: boolean
+  features: PricingFeature[]
+  ctaText: string
+  ctaLink: string
+}
 
 const PaywallSection: React.FC = () => {
+  // Countdown timer for scarcity
+  const { hours, minutes, seconds } = useCountdownTimer(4)
+
+  const pricingTiers: PricingTier[] = [
+    {
+      id: 'free',
+      name: 'Obserwuj Free',
+      price: '0 zł',
+      icon: Heart,
+      gradient: 'from-gray-700/50 to-gray-800/50',
+      borderColor: 'border-gray-600/30',
+      textColor: 'text-gray-400',
+      features: [
+        { text: 'Publiczne posty (Instagram-style)', included: true },
+        { text: 'Stories i Updates', included: true },
+        { text: 'Brak dostępu do treści +18', included: false },
+        { text: 'Brak prywatnych wiadomości', included: false },
+      ],
+      ctaText: 'Obserwuj Za Darmo',
+      ctaLink: SOCIAL_LINKS.instagram,
+    },
+    {
+      id: 'vip',
+      name: 'VIP Access',
+      price: '100 zł/msc',
+      originalPrice: '149.99 zł',
+      savings: 'Oszczędzasz 50 zł',
+      icon: Crown,
+      gradient: 'from-pink-900/50 to-purple-900/50',
+      borderColor: 'border-pink-500',
+      textColor: 'text-pink-400',
+      popular: true,
+      features: [
+        { text: 'Nielimitowane treści +18 (foto + video)', included: true },
+        { text: 'Prywatne DM - piszę sama!', included: true },
+        { text: 'Live Video Sexting', included: true },
+        { text: 'Custom Content na zamówienie', included: true },
+        { text: 'GFE (Girlfriend Experience)', included: true },
+        { text: '🎁 BONUS: Darmowy Crypto E-book', included: true, bonus: true },
+      ],
+      ctaText: 'DOŁĄCZ TERAZ 💋',
+      ctaLink: SOCIAL_LINKS.telegram,
+    },
+    {
+      id: 'diamond',
+      name: 'Diamond VIP',
+      price: '250 zł/msc',
+      originalPrice: '349.99 zł',
+      savings: 'Oszczędzasz 100 zł',
+      icon: Sparkles,
+      gradient: 'from-yellow-900/30 to-orange-900/30',
+      borderColor: 'border-yellow-500/30',
+      textColor: 'text-yellow-400',
+      features: [
+        { text: 'Wszystko z VIP Access', included: true },
+        { text: 'Priorytetowe odpowiedzi', included: true },
+        { text: 'Ekskluzywne live streamy', included: true },
+        { text: 'Mój prywatny numer WhatsApp', included: true },
+        { text: 'Możliwość spotkań IRL (Warszawa)', included: true, hot: true },
+        { text: '🎁 BONUS: Darmowy Crypto E-book', included: true, bonus: true },
+      ],
+      ctaText: 'Dołącz Diamond VIP',
+      ctaLink: SOCIAL_LINKS.telegram,
+    },
+  ]
+
   return (
-    <section className="py-12 px-4 relative overflow-hidden">
-      {/* Pusta sekcja */}
+    <section className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 relative overflow-hidden">
+      {/* Background Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-pink-900/10 to-purple-900/10" />
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-12 sm:mb-16"
+        >
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6">
+            <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+              Chcesz Mnie Poznać Bliżej? 💋
+            </span>
+          </h2>
+
+          {/* Social Proof */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="mb-6"
+          >
+            <p className="text-xl sm:text-2xl text-white mb-2">
+              <span className="text-pink-400 font-semibold">127 fanów</span> już mnie subskrybuje
+            </p>
+            <p className="text-base sm:text-lg text-gray-400">
+              Ostatnio dołączyło <span className="text-green-400 font-semibold">+8 osób</span> w tym tygodniu
+            </p>
+          </motion.div>
+
+          {/* Countdown Timer - SCARCITY  */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.25 }}
+            className="mb-6"
+          >
+            <div className="inline-flex flex-col sm:flex-row items-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 rounded-full bg-gradient-to-r from-red-600 to-orange-600 border border-red-400/30 shadow-lg shadow-red-500/30">
+              <span className="text-xs sm:text-sm font-semibold text-white">⏰ Promocja kończy się za:</span>
+              <div className="flex items-center gap-1 sm:gap-2">
+                <div className="flex flex-col items-center">
+                  <span className="text-lg sm:text-2xl font-bold text-white tabular-nums">
+                    {String(hours).padStart(2, '0')}
+                  </span>
+                  <span className="text-[10px] text-red-100">godz</span>
+                </div>
+                <span className="text-white text-lg sm:text-2xl font-bold">:</span>
+                <div className="flex flex-col items-center">
+                  <span className="text-lg sm:text-2xl font-bold text-white tabular-nums">
+                    {String(minutes).padStart(2, '0')}
+                  </span>
+                  <span className="text-[10px] text-red-100">min</span>
+                </div>
+                <span className="text-white text-lg sm:text-2xl font-bold">:</span>
+                <div className="flex flex-col items-center">
+                  <span className="text-lg sm:text-2xl font-bold text-white tabular-nums">
+                    {String(seconds).padStart(2, '0')}
+                  </span>
+                  <span className="text-[10px] text-red -100">sek</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Trust Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-pink-500/20 to-purple-500/20 border border-pink-500/30"
+          >
+            <Shield className="w-5 h-5 text-pink-400" />
+            <span className="text-sm font-medium text-white">Bezpieczne i dyskretne</span>
+          </motion.div>
+        </motion.div>
+
+        {/* Pricing Tiers */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-12">
+          {pricingTiers.map((tier, index) => (
+            <motion.div
+              key={tier.id}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1, duration: 0.6 }}
+              className={`relative ${tier.popular ? 'md:scale-105 md:-mt-4' : ''}`}
+            >
+              {/* Popular Badge */}
+              {tier.popular && (
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-pink-500 to-purple-500 px-6 py-2 rounded-full text-white font-bold text-sm shadow-lg shadow-pink-500/50 z-10">
+                  NAJPOPULARNIEJSZE ⭐
+                </div>
+              )}
+
+              <div className={`relative p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-gradient-to-br ${tier.gradient} backdrop-blur-xl border-2 ${tier.borderColor} transition-all duration-500 hover:shadow-2xl hover:scale-[1.02] h-full flex flex-col`}>
+                {/* Icon */}
+                <div className="flex justify-center mb-6">
+                  <div className={`p-4 rounded-xl bg-gradient-to-br ${tier.gradient} border ${tier.borderColor}`}>
+                    <tier.icon className={`w-8 h-8 ${tier.textColor}`} />
+                  </div>
+                </div>
+
+                {/* Name */}
+                <h3 className="text-2xl sm:text-3xl font-bold text-white text-center mb-4">
+                  {tier.name}
+                </h3>
+
+                {/* Price */}
+                <div className="text-center mb-6">
+                  <div className="flex items-center justify-center gap-2 mb-2">
+                    <span className={`text-4xl sm:text-5xl font-bold ${tier.id === 'vip' ? 'bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent' : tier.textColor}`}>
+                      {tier.price}
+                    </span>
+                  </div>
+                  {tier.originalPrice && (
+                    <div className="flex items-center justify-center gap-2">
+                      <span className="text-gray-500 line-through text-lg">{tier.originalPrice}</span>
+                    </div>
+                  )}
+                  {tier.savings && (
+                    <p className="text-green-400 text-sm font-medium mt-2">⚡ {tier.savings}</p>
+                  )}
+                </div>
+
+                {/* Features */}
+                <ul className="space-y-3 mb-6 flex-grow">
+                  {tier.features.map((feature, idx) => (
+                    <li key={idx} className="flex items-start gap-3">
+                      {feature.included ? (
+                        <Check className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
+                      ) : (
+                        <span className="w-5 h-5 flex items-center justify-center flex-shrink-0 mt-0.5 text-red-400">✕</span>
+                      )}
+                      <span className={`text-sm ${feature.included ? 'text-white' : 'text-gray-500'} ${feature.bonus ? 'font-bold text-green-400' : ''}`}>
+                        {feature.text}
+                        {feature.hot && <span className="ml-2 text-xs bg-gradient-to-r from-orange-500 to-red-500 px-2 py-0.5 rounded-full text-white font-bold">🔥 HOT</span>}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Crypto Ebook Bonus Badge - Only for paid tiers */}
+                {tier.id !== 'free' && (
+                  <div className="mb-6">
+                    <div className="p-3 bg-gradient-to-r from-green-400/10 to-emerald-400/10 rounded-xl border border-green-400/30">
+                      <div className="flex items-center justify-center space-x-2">
+                        <span className="text-xl">🎁</span>
+                        <span className="text-xs sm:text-sm text-green-400 font-bold">
+                          + Darmowy Crypto E-book!
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* CTA Button */}
+                <motion.a
+                  href={tier.ctaLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className={`block w-full py-4 rounded-xl text-center font-bold text-lg transition-all duration-300 ${tier.popular
+                    ? 'bg-gradient-to-r from-pink-500 to-purple-500 text-white shadow-lg hover:shadow-pink-500/50'
+                    : tier.id === 'diamond'
+                      ? 'bg-gradient-to-r from-yellow-600 to-orange-600 text-white shadow-lg hover:shadow-yellow-500/50'
+                      : 'bg-gray-700/50 text-gray-300 border border-gray-600/50 hover:bg-gray-600/50 hover:text-white'
+                    }`}
+                >
+                  {tier.ctaText}
+                </motion.a>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Trust Badges Row */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5 }}
+          className="flex flex-wrap justify-center items-center gap-6 sm:gap-8 text-sm text-gray-400"
+        >
+          <div className="flex items-center gap-2">
+            <Shield className="w-5 h-5 text-green-400" />
+            <span>Bezpieczne Płatności</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Lock className="w-5 h-5 text-blue-400" />
+            <span>100% Dyskrecja</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Check className="w-5 h-5 text-purple-400" />
+            <span>Anuluj Kiedy Chcesz</span>
+          </div>
+        </motion.div>
+      </div>
     </section>
   )
 }

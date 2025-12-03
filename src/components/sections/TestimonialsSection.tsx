@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { MessageCircle, Heart, Star } from 'lucide-react'
+import { CheckCheck, MoreVertical, Phone, Video, ArrowLeft, Send } from 'lucide-react'
+import profileImage from '../../assets/gallery/550356917_24256911460671885_5800828560684937416_n.jpg'
+import { SOCIAL_LINKS } from '../../utils/constants'
 
 interface Testimonial {
   id: string
-  platform: 'whatsapp' | 'telegram' | 'onlyfans'
+  platform: 'whatsapp' | 'telegram' | 'onlyfans' | 'instagram'
+  name: string
   message: string
   time: string
+  avatarUrl: string
   rating?: number
+  verified?: boolean
 }
 
 const TestimonialsSection: React.FC = () => {
@@ -17,43 +22,47 @@ const TestimonialsSection: React.FC = () => {
     {
       id: '1',
       platform: 'whatsapp',
-      message: "Nie wierzyłem, że odpisujesz, aż dostałem to wideo o 3 w nocy... 🔥",
-      time: "3:24 AM",
+      name: "Michał",
+      message: "Nie wierzyłem, że odpisujesz, aż dostałem to wideo o 3 w nocy... 🔥 Jesteś niesamowita!",
+      time: "03:24",
+      avatarUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80",
       rating: 5
     },
     {
       id: '2',
       platform: 'telegram',
+      name: "Kamil_Crypto",
       message: "Maja, twoje treści to coś niesamowitego! Każdy dzień z VIP to nowa przygoda 😍",
-      time: "11:45 PM",
+      time: "23:45",
+      avatarUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80",
       rating: 5
     },
     {
       id: '3',
       platform: 'onlyfans',
+      name: "Anonim",
       message: "Najlepsza inwestycja tego roku. Maja, jesteś wyjątkowa ❤️",
-      time: "2:15 PM",
-      rating: 5
+      time: "14:15",
+      avatarUrl: "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?auto=format&fit=crop&w=100&q=80",
+      rating: 5,
+      verified: true
     },
     {
       id: '4',
       platform: 'whatsapp',
+      name: "Piotr",
       message: "Twoje nocne wiadomości to najlepszy sposób na zakończenie dnia 🌙",
-      time: "9:30 PM",
+      time: "21:30",
+      avatarUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&q=80",
       rating: 5
     },
     {
       id: '5',
       platform: 'telegram',
+      name: "Bartek",
       message: "VIP kanał to najlepsze co mi się przytrafiło. Worth every penny!",
-      time: "7:22 AM",
-      rating: 5
-    },
-    {
-      id: '6',
-      platform: 'onlyfans',
-      message: "Codzienne rozmowy z Tobą to coś, na co czekam każdego dnia. Jesteś niesamowita! 💕",
-      time: "10:18 PM",
+      time: "07:22",
+      avatarUrl: "https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=100&q=80",
       rating: 5
     }
   ]
@@ -62,34 +71,195 @@ const TestimonialsSection: React.FC = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % testimonials.length)
-    }, 4000)
+    }, 5000)
 
     return () => clearInterval(timer)
   }, [testimonials.length])
 
-  const getPlatformIcon = (platform: string) => {
-    switch (platform) {
-      case 'whatsapp':
-        return <MessageCircle className="w-5 h-5 text-green-500" />
-      case 'telegram':
-        return <MessageCircle className="w-5 h-5 text-blue-500" />
-      case 'onlyfans':
-        return <Heart className="w-5 h-5 text-neon-pink" />
-      default:
-        return <MessageCircle className="w-5 h-5" />
-    }
-  }
+  const renderWhatsAppCard = (t: Testimonial) => (
+    <div className="bg-[#e5ddd5] dark:bg-[#0b141a] rounded-3xl overflow-hidden shadow-2xl border border-gray-200 dark:border-gray-800 max-w-sm mx-auto h-full flex flex-col font-sans">
+      {/* Header */}
+      <div className="bg-[#008069] dark:bg-[#202c33] p-3 flex items-center gap-3 text-white shadow-sm z-10">
+        <ArrowLeft className="w-5 h-5" />
+        <div className="w-9 h-9 rounded-full overflow-hidden bg-gray-300">
+          <img src={profileImage} alt="Maja" className="w-full h-full object-cover" />
+        </div>
+        <div className="flex-1">
+          <h3 className="font-semibold text-sm leading-tight">Maja ❤️</h3>
+          <p className="text-[10px] opacity-80">online</p>
+        </div>
+        <div className="flex gap-4">
+          <Video className="w-5 h-5" />
+          <Phone className="w-4 h-4" />
+          <MoreVertical className="w-4 h-4" />
+        </div>
+      </div>
 
-  const getPlatformColor = (platform: string) => {
-    switch (platform) {
-      case 'whatsapp':
-        return 'from-green-500/20 to-green-600/20 border-green-500/30'
-      case 'telegram':
-        return 'from-blue-500/20 to-blue-600/20 border-blue-500/30'
-      case 'onlyfans':
-        return 'from-neon-pink/20 to-neon-purple/20 border-neon-pink/30'
-      default:
-        return 'from-gray-500/20 to-gray-600/20 border-gray-500/30'
+      {/* Chat Area */}
+      <div className="flex-1 p-4 relative overflow-hidden flex flex-col justify-end space-y-2" style={{ backgroundImage: 'url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png")', backgroundSize: '400px' }}>
+        <div className="absolute inset-0 bg-[#e5ddd5]/90 dark:bg-[#0b141a]/90"></div>
+
+        {/* Date Bubble */}
+        <div className="relative z-10 flex justify-center mb-4">
+          <span className="bg-[#e1f3fb] dark:bg-[#1f2c34] text-gray-600 dark:text-gray-300 text-[10px] px-2 py-1 rounded-lg shadow-sm font-medium uppercase">
+            Dzisiaj
+          </span>
+        </div>
+
+        {/* User Message (Right) */}
+        <div className="relative z-10 self-end max-w-[85%]">
+          <div className="bg-[#d9fdd3] dark:bg-[#005c4b] p-2 px-3 rounded-lg rounded-tr-none shadow-sm text-sm text-gray-800 dark:text-gray-100 leading-snug">
+            {t.message}
+            <div className="flex items-center justify-end gap-1 mt-1">
+              <span className="text-[10px] text-gray-500 dark:text-gray-400">{t.time}</span>
+              <CheckCheck className="w-3 h-3 text-[#53bdeb]" />
+            </div>
+          </div>
+        </div>
+
+        {/* Maja Reply (Left) - Optional */}
+        <div className="relative z-10 self-start max-w-[85%]">
+          <div className="bg-white dark:bg-[#202c33] p-2 px-3 rounded-lg rounded-tl-none shadow-sm text-sm text-gray-800 dark:text-gray-100 leading-snug">
+            Dzięki {t.name}! 😘 Czekaj na wieczór... 😈
+            <div className="flex items-center justify-end gap-1 mt-1">
+              <span className="text-[10px] text-gray-500 dark:text-gray-400">{t.time}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Input Area */}
+      <div className="bg-[#f0f2f5] dark:bg-[#202c33] p-2 flex items-center gap-2">
+        <div className="bg-white dark:bg-[#2a3942] flex-1 rounded-full px-4 py-2 text-sm text-gray-400 flex justify-between items-center">
+          <span>Napisz wiadomość...</span>
+        </div>
+        <div className="bg-[#008069] p-2 rounded-full text-white">
+          <Send className="w-4 h-4" />
+        </div>
+      </div>
+    </div>
+  )
+
+  const renderTelegramCard = (t: Testimonial) => (
+    <div className="bg-[#99BA92] dark:bg-[#0e1621] rounded-3xl overflow-hidden shadow-2xl border border-gray-200 dark:border-gray-800 max-w-sm mx-auto h-full flex flex-col font-sans relative">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'url("https://telegram.org/file/464001088/1/bI7_Mp_7ksA.97872/014e2d83c22e38a035")', backgroundSize: 'cover' }}></div>
+
+      {/* Header */}
+      <div className="bg-[#517da2] dark:bg-[#17212b] p-3 flex items-center gap-3 text-white shadow-sm z-10">
+        <ArrowLeft className="w-5 h-5" />
+        <div className="w-9 h-9 rounded-full overflow-hidden bg-gray-300">
+          <img src={profileImage} alt="Maja" className="w-full h-full object-cover" />
+        </div>
+        <div className="flex-1">
+          <h3 className="font-semibold text-sm leading-tight">Maja VIP 💎</h3>
+          <p className="text-[10px] opacity-80">12 453 subskrybentów</p>
+        </div>
+        <MoreVertical className="w-4 h-4" />
+      </div>
+
+      {/* Chat Area */}
+      <div className="flex-1 p-4 relative z-10 flex flex-col justify-end space-y-3">
+
+        {/* Message Bubble */}
+        <div className="self-start max-w-[90%] bg-white dark:bg-[#182533] p-3 rounded-2xl rounded-tl-none shadow-sm text-sm text-gray-800 dark:text-gray-100 leading-snug relative">
+          <div className="flex items-center gap-2 mb-1">
+            <div className="w-6 h-6 rounded-full overflow-hidden">
+              <img src={t.avatarUrl} alt={t.name} className="w-full h-full object-cover" />
+            </div>
+            <span className="text-[#4c78a1] dark:text-[#64b5ef] font-semibold text-xs">{t.name}</span>
+          </div>
+          {t.message}
+          <div className="flex items-center justify-end gap-1 mt-1">
+            <span className="text-[10px] text-gray-400">{t.time}</span>
+          </div>
+        </div>
+
+        {/* Maja Reply */}
+        <div className="self-start max-w-[90%] bg-white dark:bg-[#182533] p-3 rounded-2xl rounded-tl-none shadow-sm text-sm text-gray-800 dark:text-gray-100 leading-snug relative ml-4">
+          <div className="flex items-center gap-2 mb-1">
+            <span className="text-[#e17076] font-semibold text-xs">Maja (Admin)</span>
+            <span className="bg-[#e17076]/10 text-[#e17076] text-[8px] px-1 rounded">WŁAŚCICIEL</span>
+          </div>
+          Dzięki za wsparcie! ❤️
+          <div className="flex items-center justify-end gap-1 mt-1">
+            <span className="text-[10px] text-gray-400">{t.time}</span>
+          </div>
+        </div>
+
+      </div>
+
+      {/* Input Area */}
+      <div className="bg-white dark:bg-[#17212b] p-2 flex items-center gap-2 z-10">
+        <div className="flex-1 text-sm text-gray-400 px-2">
+          Napisz wiadomość...
+        </div>
+        <Send className="w-5 h-5 text-[#517da2]" />
+      </div>
+    </div>
+  )
+
+  const renderOnlyFansCard = (t: Testimonial) => (
+    <div className="bg-white dark:bg-[#1b1b1b] rounded-3xl overflow-hidden shadow-2xl border border-gray-200 dark:border-gray-800 max-w-sm mx-auto h-full flex flex-col font-sans">
+      {/* Header */}
+      <div className="bg-white dark:bg-[#1b1b1b] p-3 flex items-center justify-between border-b border-gray-100 dark:border-gray-800 z-10">
+        <div className="flex items-center gap-3">
+          <ArrowLeft className="w-5 h-5 text-gray-800 dark:text-white" />
+          <h3 className="font-bold text-sm text-gray-800 dark:text-white uppercase">POSTY</h3>
+        </div>
+        <MoreVertical className="w-4 h-4 text-gray-800 dark:text-white" />
+      </div>
+
+      {/* Content */}
+      <div className="flex-1 overflow-y-auto bg-gray-50 dark:bg-black">
+        {/* Post Header */}
+        <div className="bg-white dark:bg-[#1b1b1b] p-3 flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full overflow-hidden border border-gray-200">
+            <img src={profileImage} alt="Maja" className="w-full h-full object-cover" />
+          </div>
+          <div>
+            <div className="flex items-center gap-1">
+              <span className="font-bold text-sm text-gray-900 dark:text-white">Maja</span>
+              <CheckCheck className="w-3 h-3 text-[#00aff0] bg-transparent rounded-full" />
+            </div>
+            <span className="text-xs text-gray-500">@mayalubicz • 2h temu</span>
+          </div>
+        </div>
+
+        {/* Post Content (Text) */}
+        <div className="bg-white dark:bg-[#1b1b1b] px-3 pb-2 text-sm text-gray-800 dark:text-gray-200">
+          Kto chce nowy filmik? 👇😈
+        </div>
+
+        {/* Comment Section */}
+        <div className="mt-2 bg-white dark:bg-[#1b1b1b] p-3 border-t border-gray-100 dark:border-gray-800">
+          <div className="flex gap-3">
+            <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
+              <img src={t.avatarUrl} alt={t.name} className="w-full h-full object-cover" />
+            </div>
+            <div className="flex-1">
+              <div className="bg-gray-100 dark:bg-[#2a2a2a] rounded-2xl p-3 text-sm">
+                <span className="font-bold text-gray-900 dark:text-white mr-2">{t.name}</span>
+                <span className="text-gray-700 dark:text-gray-300">{t.message}</span>
+              </div>
+              <div className="flex gap-4 mt-1 ml-2 text-xs text-gray-500 font-medium">
+                <span>Lubię to!</span>
+                <span>Odpowiedz</span>
+                <span>{t.time}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+
+  const renderCard = (t: Testimonial) => {
+    switch (t.platform) {
+      case 'whatsapp': return renderWhatsAppCard(t)
+      case 'telegram': return renderTelegramCard(t)
+      case 'onlyfans': return renderOnlyFansCard(t)
+      default: return renderWhatsAppCard(t)
     }
   }
 
@@ -99,126 +269,6 @@ const TestimonialsSection: React.FC = () => {
       <div className="absolute inset-0">
         <div className="absolute top-1/3 left-1/5 w-72 h-72 bg-neon-pink/5 rounded-full blur-3xl animate-pulse-slow"></div>
         <div className="absolute bottom-1/3 right-1/5 w-72 h-72 bg-neon-purple/5 rounded-full blur-3xl animate-pulse-slow delay-1000"></div>
-
-        {/* Floating Hearts */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          {/* Heart 1 */}
-          <motion.div
-            initial={{ opacity: 0, y: 100, x: -50 }}
-            animate={{
-              opacity: [0, 0.6, 0.8, 0.4, 0],
-              y: [-100, -200, -300, -400, -500],
-              x: [-50, 20, -30, 50, -20],
-              rotate: [0, 15, -10, 25, -15]
-            }}
-            transition={{
-              duration: 12,
-              repeat: Infinity,
-              delay: 0,
-              ease: "easeInOut"
-            }}
-            className="absolute top-full left-1/4"
-          >
-            <Heart className="w-6 h-6 text-neon-pink/60 fill-current animate-heart-glow" />
-          </motion.div>
-
-          {/* Heart 2 */}
-          <motion.div
-            initial={{ opacity: 0, y: 100, x: 50 }}
-            animate={{
-              opacity: [0, 0.7, 0.9, 0.5, 0],
-              y: [-100, -250, -350, -450, -550],
-              x: [50, -20, 40, -30, 60],
-              rotate: [0, -20, 10, -25, 20]
-            }}
-            transition={{
-              duration: 15,
-              repeat: Infinity,
-              delay: 3,
-              ease: "easeInOut"
-            }}
-            className="absolute top-full right-1/3"
-          >
-            <Heart className="w-8 h-8 text-neon-purple/50 fill-current animate-heart-pulse" />
-          </motion.div>
-
-          {/* Heart 3 */}
-          <motion.div
-            initial={{ opacity: 0, y: 100, x: 0 }}
-            animate={{
-              opacity: [0, 0.5, 0.7, 0.3, 0],
-              y: [-100, -180, -280, -380, -480],
-              x: [0, 30, -40, 20, -10],
-              rotate: [0, 10, -15, 20, -5]
-            }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              delay: 6,
-              ease: "easeInOut"
-            }}
-            className="absolute top-full left-1/2"
-          >
-            <Heart className="w-5 h-5 text-pink-400/70 fill-current animate-heart-float" />
-          </motion.div>
-
-          {/* Heart 4 */}
-          <motion.div
-            initial={{ opacity: 0, y: 100, x: -30 }}
-            animate={{
-              opacity: [0, 0.8, 0.6, 0.4, 0],
-              y: [-100, -220, -320, -420, -520],
-              x: [-30, 40, -20, 50, -40],
-              rotate: [0, 25, -20, 15, -30]
-            }}
-            transition={{
-              duration: 14,
-              repeat: Infinity,
-              delay: 9,
-              ease: "easeInOut"
-            }}
-            className="absolute top-full right-1/4"
-          >
-            <Heart className="w-7 h-7 text-neon-pink/40 fill-current animate-heart-glow" />
-          </motion.div>
-
-          {/* Small floating hearts */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{
-              opacity: [0, 0.3, 0.5, 0.2, 0],
-              y: [-50, -150, -250, -350, -450],
-              x: [10, -15, 25, -20, 30]
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              delay: 2,
-              ease: "linear"
-            }}
-            className="absolute top-full left-1/6"
-          >
-            <Heart className="w-4 h-4 text-purple-300/60 fill-current" />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{
-              opacity: [0, 0.4, 0.6, 0.3, 0],
-              y: [-50, -180, -280, -380, -480],
-              x: [-10, 20, -25, 15, -30]
-            }}
-            transition={{
-              duration: 11,
-              repeat: Infinity,
-              delay: 5,
-              ease: "linear"
-            }}
-            className="absolute top-full right-1/6"
-          >
-            <Heart className="w-4 h-4 text-pink-300/50 fill-current" />
-          </motion.div>
-        </div>
       </div>
 
       <div className="max-w-6xl mx-auto relative z-10">
@@ -238,141 +288,36 @@ const TestimonialsSection: React.FC = () => {
         </motion.div>
 
         {/* Main Testimonial Display */}
-        <div className="relative max-w-4xl mx-auto mb-16">
-          {/* Decorative elements around testimonials */}
-          <div className="absolute inset-0 pointer-events-none">
-            {/* Sparkle effects */}
-            <motion.div
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.3, 0.8, 0.3],
-                rotate: [0, 180, 360]
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-              className="absolute -top-8 -left-8 w-4 h-4 bg-neon-pink/30 rounded-full blur-sm"
-            />
-            <motion.div
-              animate={{
-                scale: [1, 1.3, 1],
-                opacity: [0.2, 0.7, 0.2],
-                rotate: [360, 180, 0]
-              }}
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-                delay: 1,
-                ease: "easeInOut"
-              }}
-              className="absolute -top-4 -right-12 w-3 h-3 bg-neon-purple/40 rounded-full blur-sm"
-            />
-            <motion.div
-              animate={{
-                scale: [1, 1.1, 1],
-                opacity: [0.4, 0.9, 0.4],
-                rotate: [0, 90, 180]
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                delay: 2,
-                ease: "easeInOut"
-              }}
-              className="absolute -bottom-6 -left-10 w-5 h-5 bg-pink-400/25 rounded-full blur-sm"
-            />
-            <motion.div
-              animate={{
-                scale: [1, 1.4, 1],
-                opacity: [0.3, 0.6, 0.3],
-                rotate: [180, 270, 360]
-              }}
-              transition={{
-                duration: 6,
-                repeat: Infinity,
-                delay: 0.5,
-                ease: "easeInOut"
-              }}
-              className="absolute -bottom-8 -right-6 w-6 h-6 bg-purple-300/20 rounded-full blur-sm"
-            />
-          </div>
+        <div className="relative max-w-sm mx-auto h-[500px] mb-12">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex}
-              initial={{ opacity: 0, x: 100 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -100 }}
-              transition={{ duration: 0.5 }}
-              className="relative"
+              initial={{ opacity: 0, scale: 0.9, rotate: -5 }}
+              animate={{ opacity: 1, scale: 1, rotate: 0 }}
+              exit={{ opacity: 0, scale: 0.9, rotate: 5 }}
+              transition={{ duration: 0.4 }}
+              className="absolute inset-0"
             >
-              {/* Text Testimonial - Phone Mockup */}
-              <div className="bg-dark-800 rounded-3xl p-6 max-w-md mx-auto shadow-2xl border border-gray-700">
-                {/* Phone Header */}
-                <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-600">
-                  <div className="flex items-center gap-3">
-                    {getPlatformIcon(testimonials[currentIndex].platform)}
-                    <div>
-                      <h3 className="text-white font-semibold">Maja</h3>
-                      <p className="text-green-400 text-sm">● Online</p>
-                    </div>
-                  </div>
-                  <div className="text-gray-400 text-sm">
-                    {testimonials[currentIndex].time}
-                  </div>
-                </div>
-
-                {/* Message */}
-                <div className="space-y-4">
-                  {/* Laura's message (placeholder) */}
-                  <div className="flex justify-end">
-                    <div className="bg-neon-pink/20 text-white px-4 py-3 rounded-2xl rounded-br-md max-w-xs">
-                      <p className="text-sm">Hey babe 😘</p>
-                    </div>
-                  </div>
-
-                  {/* Fan's response */}
-                  <div className="flex justify-start">
-                    <div className={`
-                      bg-gradient-to-r ${getPlatformColor(testimonials[currentIndex].platform)}
-                      text-white px-4 py-3 rounded-2xl rounded-bl-md max-w-xs
-                    `}>
-                      <p className="text-sm">{testimonials[currentIndex].message}</p>
-                    </div>
-                  </div>
-
-                  {/* Rating */}
-                  {testimonials[currentIndex].rating && (
-                    <div className="flex justify-start">
-                      <div className="flex items-center gap-1 bg-dark-700 px-3 py-2 rounded-full">
-                        {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                          <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
+              {renderCard(testimonials[currentIndex])}
             </motion.div>
           </AnimatePresence>
+        </div>
 
-          {/* Navigation Dots */}
-          <div className="flex justify-center gap-2 mt-8">
-            {testimonials.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`
-                  w-3 h-3 rounded-full transition-all duration-300
-                  ${index === currentIndex 
-                    ? 'bg-neon-pink scale-125' 
-                    : 'bg-gray-600 hover:bg-gray-500'
-                  }
-                `}
-              />
-            ))}
-          </div>
+        {/* Navigation Dots */}
+        <div className="flex justify-center gap-2 mb-16">
+          {testimonials.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentIndex(index)}
+              className={`
+                w-3 h-3 rounded-full transition-all duration-300
+                ${index === currentIndex
+                  ? 'bg-neon-pink scale-125'
+                  : 'bg-gray-600 hover:bg-gray-500'
+                }
+              `}
+            />
+          ))}
         </div>
 
         {/* Stats */}
@@ -411,9 +356,14 @@ const TestimonialsSection: React.FC = () => {
             <p className="text-gray-300 mb-6">
               Nie czekaj - każda chwila to stracona okazja na niezapomniane doświadczenia.
             </p>
-            <button className="neon-button px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-transform">
+            <a
+              href={SOCIAL_LINKS.telegram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="neon-button px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-transform inline-block"
+            >
               Zacznij swoją przygodę
-            </button>
+            </a>
           </div>
         </motion.div>
       </div>

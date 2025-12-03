@@ -1,33 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { User, CheckCircle, ArrowRight, BookOpen } from 'lucide-react'
-import { trackCTAClick } from '../../utils/analytics'
-import { EBOOK_SALE_URL } from '../../utils/constants'
+import React from 'react'
+import { motion } from 'framer-motion'
+import { User, CheckCircle } from 'lucide-react'
 
-interface TopBarProps {
-  showEbookCTA?: boolean;
-}
-
-const TopBar: React.FC<TopBarProps> = () => {
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 100) { // Show CTA after scrolling 100px
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const handleBuyClick = () => {
-    trackCTAClick('ebook_buy', 'top_bar');
-    window.open(EBOOK_SALE_URL, '_blank');
-  };
-
+const TopBar: React.FC = () => {
   return (
     <motion.div
       initial={{ opacity: 0, y: -20 }}
@@ -37,17 +12,17 @@ const TopBar: React.FC<TopBarProps> = () => {
     >
       {/* Enhanced Glassmorphism background with better mobile visibility */}
       <div className="absolute inset-0 bg-gradient-to-br from-gold/10 via-purple-500/10 to-neon-pink/10 backdrop-blur-xl rainbow-border-subtle"></div>
-      
+
       {/* Enhanced mobile background for better contrast */}
       <div className="absolute inset-0 bg-dark-900/60 sm:bg-dark-900/40 backdrop-blur-xl"></div>
-      
+
       {/* Subtle glow effect at the bottom */}
       <div className="absolute -bottom-2 left-0 right-0 h-4 bg-gradient-to-r from-transparent via-gold/20 to-transparent blur-sm"></div>
-      
+
       {/* Animated flowing border effect */}
       <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-gold/60 to-transparent animate-pulse"></div>
-      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-purple-400/40 via-neon-pink/60 to-cyan-400/40 animate-pulse" style={{animationDelay: '0.5s'}}></div>
-      
+      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-purple-400/40 via-neon-pink/60 to-cyan-400/40 animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+
       <div className="relative z-10 max-w-7xl mx-auto">
         <div className="flex items-center justify-between relative">
           {/* Left side - Profile info with improved mobile layout */}
@@ -88,37 +63,13 @@ const TopBar: React.FC<TopBarProps> = () => {
             <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-gold via-neon-pink to-purple-400 bg-clip-text text-transparent whitespace-nowrap">
               social.club
             </h1>
-            
+
             {/* Subtle glow effect behind text */}
             <div className="absolute inset-0 bg-gradient-to-r from-gold/20 via-neon-pink/20 to-purple-400/20 blur-xl opacity-50 -z-10"></div>
           </motion.div>
 
-          {/* Right side - Ebook CTA (mobile only, visible on scroll) */}
-          <AnimatePresence>
-            {scrolled && (
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                transition={{ duration: 0.3 }}
-                className="lg:hidden flex-shrink-0"
-              >
-                <motion.button
-                  onClick={handleBuyClick}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-3 py-1.5 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white text-xs font-bold shadow-lg shadow-pink-500/30 hover:shadow-pink-500/50 transition-all duration-300 flex items-center gap-1"
-                  aria-label="Kup teraz e-book - mobilny CTA w TopBar"
-                >
-                  <BookOpen className="w-3 h-3" />
-                  <span>E-book</span>
-                  <ArrowRight className="w-3 h-3" />
-                </motion.button>
-              </motion.div>
-            )}
-          </AnimatePresence>
-          {/* Spacer if Ebook CTA is hidden to maintain layout */}
-          {!scrolled && <div className="flex-shrink-0 w-16 sm:w-20 md:w-24 lg:hidden"></div>}
+          {/* Spacer to maintain layout */}
+          <div className="flex-shrink-0 w-16 sm:w-20 md:w-24 lg:hidden"></div>
 
           {/* Right side - Spacer to balance layout (desktop) */}
           <div className="flex-shrink-0 w-16 sm:w-20 md:w-24 hidden lg:block"></div>
@@ -126,7 +77,7 @@ const TopBar: React.FC<TopBarProps> = () => {
 
         {/* Decorative elements */}
         <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-24 sm:w-32 h-[1px] bg-gradient-to-r from-transparent via-gold/40 to-transparent"></div>
-        
+
         {/* Floating particles effect - reduced for mobile */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
           {[...Array(2)].map((_, i) => (
@@ -134,7 +85,7 @@ const TopBar: React.FC<TopBarProps> = () => {
               key={i}
               className="absolute w-0.5 h-0.5 sm:w-1 sm:h-1 bg-gold/30 rounded-full"
               style={{
-                left: `${25 + i * 50}%`,
+                left: `${25 + i * 50}% `,
                 top: '50%',
               }}
               animate={{
