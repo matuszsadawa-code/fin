@@ -2,7 +2,7 @@
 export const SOCIAL_LINKS = {
   instagram: "https://instagram.com/mayalubicz",
   tiktok: "https://tiktok.com/@mayalubicz",
-  telegram: "https://t.me/+o6EMRisharVkM2E0",
+  telegram: "https://t.me/MayaLubicz_Bot",
   twitter: "https://x.com/mayalubicz",
 }
 
