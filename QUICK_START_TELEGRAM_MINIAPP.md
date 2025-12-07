@@ -40,13 +40,13 @@ npm run dev
 
 **Strona Weryfikacji:**
 
-```
+```text
 http://localhost:5173/verify
 ```
 
 **Strona VIP Access:**
 
-```
+```text
 http://localhost:5173/vip-access?user_id=123456789
 ```
 
@@ -80,7 +80,7 @@ stripePriceId: 'price_TWÓJ_PRAWDZIWY_DIAMOND_PRICE_ID',
 const TELEGRAM_BOT_WEBHOOK = 'https://twoj-bot.com/api/create-payment';
 ```
 
-3. Zaimplementuj endpoint zgodnie z dokumentacją w `TELEGRAM_MINI_APP_INTEGRATION.md`
+1. Zaimplementuj endpoint zgodnie z dokumentacją w `TELEGRAM_MINI_APP_INTEGRATION.md`
 
 ### 3. Webhook Stripe
 
@@ -237,7 +237,7 @@ Pełna dokumentacja integracji znajduje się w:
 
 ---
 
-**Status: ✅ GOTOWE DO TESTOWANIA**
+### Status: ✅ GOTOWE DO TESTOWANIA
 
 Wszystkie komponenty zostały zaimplementowane. Teraz musisz tylko:
 
@@ -245,4 +245,4 @@ Wszystkie komponenty zostały zaimplementowane. Teraz musisz tylko:
 2. Zaimplementować backend
 3. Wdrożyć na produkcję
 
-**Powodzenia! 🚀💎**
+### Powodzenia! 🚀💎
