@@ -20,6 +20,9 @@ import TopBar from './components/ui/TopBar'
 import AgeGate from './components/ui/AgeGate'
 import ExitIntentPopup from './components/ui/ExitIntentPopup'
 import AnalyticsDashboard from './components/pages/AnalyticsDashboard'
+import VerifyPage from './components/pages/VerifyPage'
+import VIPAccessPage from './components/pages/VIPAccessPage'
+import PaymentSuccessPage from './components/pages/PaymentSuccessPage'
 
 import { trackPageView, storeDeviceData, trackScrollDepth, trackTimeOnPage } from './utils/analytics'
 
@@ -97,6 +100,9 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/analytics" element={<AnalyticsDashboard />} />
+        <Route path="/verify" element={<VerifyPage />} />
+        <Route path="/vip-access" element={<VIPAccessPage />} />
+        <Route path="/payment-success" element={<PaymentSuccessPage />} />
       </Routes>
     </Router>
   )

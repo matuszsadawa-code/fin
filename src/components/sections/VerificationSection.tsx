@@ -1,6 +1,6 @@
-import React, { useRef, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Shield, Calendar, MapPin, Star, Award, Verified, Mic } from 'lucide-react';
+import React, { useRef, useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Shield, Calendar, MapPin, Star, Award, Verified, Mic, X, ZoomIn, Eye } from 'lucide-react';
 import weryfikacjaImage from '../../assets/weryfikacja.jpg';
 import voiceVerification from '../../assets/weryfikacja.mp3';
 
@@ -8,6 +8,7 @@ const VerificationSection: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const hasPlayedRef = useRef(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const audioElement = audioRef.current;
@@ -64,6 +65,7 @@ const VerificationSection: React.FC = () => {
   };
 
   const verificationItems = [
+
     {
       icon: Shield,
       title: "Tożsamość zweryfikowana",
@@ -199,15 +201,27 @@ const VerificationSection: React.FC = () => {
                 <h3 className="text-2xl font-bold text-white">Zdjęcie weryfikacyjne</h3>
               </div>
 
-              <div className="relative rounded-xl overflow-hidden group-hover:scale-[1.02] transition-transform duration-300">
+              <div
+                className="relative rounded-xl overflow-hidden group-hover:scale-[1.02] transition-all duration-300 cursor-zoom-in"
+                onClick={() => setIsModalOpen(true)}
+              >
                 <img
                   src={weryfikacjaImage}
                   alt="Maja trzymająca kartkę z datą i nazwą platformy"
                   className="w-full h-auto"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <div className="bg-dark-800/90 backdrop-blur-sm rounded-lg p-4 border border-green-400/20">
+
+                {/* Overlay on hover to indicate click */}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                  <div className="bg-dark-900/80 backdrop-blur-md rounded-full px-4 py-2 flex items-center gap-2 border border-white/20">
+                    <ZoomIn className="w-4 h-4 text-white" />
+                    <span className="text-white text-sm font-medium">Powiększ zdjęcie</span>
+                  </div>
+                </div>
+
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-6 pointer-events-none">
+                  <div className="bg-dark-800/90 backdrop-blur-sm rounded-lg p-4 border border-green-400/20 inline-block">
                     <p className="text-white text-sm font-medium mb-1">
                       📅 Zdjęcie potwierdzone: 10.10.2025r
                     </p>
@@ -249,7 +263,7 @@ const VerificationSection: React.FC = () => {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className={`group/item flex items-start p-4 rounded-xl ${item.bgColor} hover:scale-[1.02] transition-all duration-300 cursor-pointer rainbow-border-full`}
+                    className={`group/item flex items-start p-4 rounded-xl ${item.bgColor} hover:scale-[1.02] transition-all duration-300 rainbow-border-full`}
                   >
                     <div className={`w-12 h-12 rounded-full ${item.bgColor} flex items-center justify-center mr-4 group-hover/item:scale-110 transition-transform duration-300`}>
                       <item.icon className={`w-6 h-6 ${item.color}`} />
@@ -297,6 +311,28 @@ const VerificationSection: React.FC = () => {
                 </p>
               </motion.div>
 
+              {/* View ID Card - Standalone */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+                onClick={() => setIsModalOpen(true)}
+                className="mt-6 p-4 bg-neon-pink/10 rounded-xl hover:scale-[1.02] transition-all duration-300 cursor-pointer rainbow-border-animated group/item flex items-start"
+              >
+                <div className="w-12 h-12 rounded-full bg-neon-pink/10 flex items-center justify-center mr-4 group-hover/item:scale-110 transition-transform duration-300">
+                  <Eye className="w-6 h-6 text-neon-pink" />
+                </div>
+                <div className="flex-1">
+                  <h4 className="text-white font-semibold mb-2">
+                    Zobacz Oryginał Dowodu
+                  </h4>
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    Kliknij tutaj, aby zobaczyć pełne zdjęcie dowodu tożsamości w wysokiej rozdzielczości.
+                  </p>
+                </div>
+              </motion.div>
+
               {/* Trust Score */}
               <div className="mt-8 p-6 bg-gradient-to-r from-neon-pink/10 to-purple-400/10 rounded-xl rainbow-border-animated">
                 <div className="flex items-center justify-between">
@@ -318,6 +354,45 @@ const VerificationSection: React.FC = () => {
           </motion.div>
         </motion.div>
       </div>
+
+      {/* Image Modal */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md"
+            onClick={() => setIsModalOpen(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="relative max-w-4xl w-full max-h-[90vh] flex flex-col items-center"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="absolute -top-12 right-0">
+                <button
+                  onClick={() => setIsModalOpen(false)}
+                  className="bg-white/10 hover:bg-white/20 text-white rounded-full p-2 transition-colors"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+              <img
+                src={weryfikacjaImage}
+                alt="Dowód weryfikacji - pełny rozmiar"
+                className="w-full h-auto max-h-[85vh] object-contain rounded-xl shadow-2xl border border-white/10"
+              />
+              <p className="text-gray-400 mt-4 font-medium flex items-center gap-2">
+                <Verified className="w-4 h-4 text-green-400" />
+                Oryginalne zdjęcie weryfikacyjne zatwierdzone przez administrację
+              </p>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
